@@ -120,6 +120,9 @@ class Scanner {
         }
         line = input.line();
         switch (ch) {
+        case '%':
+            nextCh();
+            return new TokenInfo(REM, line);
         case '(':
             nextCh();
             return new TokenInfo(LPAREN, line);
