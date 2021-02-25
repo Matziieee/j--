@@ -254,3 +254,12 @@ class JMultiplyOp extends JBinaryExpression {
     }
 
 }
+
+class JDivideOp extends JBinaryExpression {
+    public JDivideOp (int line, JExpression lhs, JExpression rhs){
+        super(line, "/", lhs, rhs);
+    }
+    public JExpression analyze (Context context){ return this;}
+
+    public void codegen(CLEmitter output) {}
+}
