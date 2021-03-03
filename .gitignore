@@ -1,0 +1,9 @@
+# ignore classes
+
+classes/*
+
+# executebles
+
+bin/*
+
+
