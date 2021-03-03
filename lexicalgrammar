@@ -75,6 +75,9 @@ STAR        ::= "*"
 DIV         ::= "/"
 REM         ::= "%"
 BTAND       ::= "&"
+BTOR        ::= "|"
+BTXOR       ::= "^"
+UCOMP       ::= "~"
 
 // Separators
 COMMA       ::= ","

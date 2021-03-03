@@ -16,7 +16,7 @@ public class BitwiseAndTest extends TestCase {
         super.tearDown();
     }
 
-    public void testDivide() {
+    public void testBitAnd() {
         this.assertEquals(bitwiseAnd.and(5, 3),1);
         this.assertEquals(bitwiseAnd.and(10, 6),2);
         this.assertEquals(bitwiseAnd.and(20, 12),4);

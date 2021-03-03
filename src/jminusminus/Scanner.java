@@ -207,6 +207,15 @@ class Scanner {
             } else {
                 return new TokenInfo(MINUS, line);
             }
+        case '~':
+            nextCh();
+            return new TokenInfo(UCOMP, line);
+        case '|':
+            nextCh();
+            return new TokenInfo(BTOR, line);
+        case '^':
+            nextCh();
+            return new TokenInfo(BTXOR, line);
         case '&':
             nextCh();
             if (ch == '&') {

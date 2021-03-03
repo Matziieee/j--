@@ -1044,6 +1044,40 @@ public class Parser {
         while(more){
             if(have(BTAND)) {
                 lhs = new JBitwiseAndOp(line,lhs,equalityExpression());
+            } else if (have(BTOR)){
+                lhs = new JBitwiseOrOp(line, lhs, equalityExpression());
+            } else if (have(BTXOR)) {
+                lhs = new JBitwiseExclusiveOrOp(line, lhs, equalityExpression());
+            }
+            else{
+                more = false;
+            }
+        }
+        return lhs;
+    }
+
+    private JExpression bitwiseOrExpression(){
+        int line = scanner.token().line();
+        boolean more = true;
+        JExpression lhs = equalityExpression();
+        while(more){
+            if(have(BTAND)) {
+                lhs = new JBitwiseOrOp(line,lhs,equalityExpression());
+            }
+            else{
+                more = false;
+            }
+        }
+        return lhs;
+    }
+
+    private JExpression bitwiseExclusiveOrExpression(){
+        int line = scanner.token().line();
+        boolean more = true;
+        JExpression lhs = equalityExpression();
+        while(more){
+            if(have(BTAND)) {
+                lhs = new JBitwiseExclusiveOrOp(line,lhs,equalityExpression());
             }
             else{
                 more = false;
@@ -1180,7 +1214,10 @@ public class Parser {
             return new JPreIncrementOp(line, unaryExpression());
         } else if (have(MINUS)) {
             return new JNegateOp(line, unaryExpression());
-        } else {
+        } else if (have(UCOMP)) {
+            return new JUnaryCompOp(line, unaryExpression());
+        }
+         else {
             return simpleUnaryExpression();
         }
     }
