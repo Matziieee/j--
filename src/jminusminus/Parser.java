@@ -1127,9 +1127,9 @@ public class Parser {
         int line = scanner.token().line();
         JExpression lhs = additiveExpression();
         if (have(GT)) {
-            return new JGreaterThanOp(line, lhs, additiveExpression());
+            return new JGreaterThanOp(line, lhs, shiftExpression());
         } else if (have(LE)) {
-            return new JLessEqualOp(line, lhs, additiveExpression());
+            return new JLessEqualOp(line, lhs, shiftExpression());
         } else if (have(INSTANCEOF)) {
             return new JInstanceOfOp(line, lhs, referenceType());
         } else {
@@ -1137,6 +1137,29 @@ public class Parser {
         }
     }
 
+    /* Parse shift operations                // level 4
+    <<,>>,>>>
+    */
+
+    private JExpression shiftExpression() {
+        int line = scanner.token().line();
+        boolean more = true;
+        JExpression lhs = additiveExpression();
+        while (more) {
+            if (have(SHL)) {
+                lhs = new JShiftLeftOp(line, lhs, additiveExpression());
+            } 
+            else if (have(SHR)){
+                lhs = new JShiftRightOp(line, lhs, additiveExpression());
+            }
+            else{
+                more = false;
+            }
+        }
+        return lhs;
+    }
+
+    
     /**
      * Parse an additive expression.
      * 
