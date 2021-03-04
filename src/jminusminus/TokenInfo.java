@@ -27,12 +27,13 @@ enum TokenKind {
 
     // Operators
     ASSIGN("="), DEC("--"), EQUAL("=="), GT(">"), INC("++"), LAND("&&"), 
-    LE("<="), LNOT("!"), MINUS("-"), PLUS("+"), PLUS_ASSIGN("+="), STAR("*"),
-    DIV("/"), REM("%"), UCOMP("~"), BTAND("&"), BTOR("|"), BTXOR("^"),QUESTION("?"),
-    NOTEQ("!="),DIV_ASSIGN("/="), MINUS_ASSIGN("-="),STAR_ASSIGN("*="),REM_ASSIGN("%="),
-    RSHFT(">>"),RSHFT_ASSIGN(">>="), TRSHFT(">>>"), THSHFT_ASSIGN(">>>="), GT_ASSIGN(">="),
-    LSHFT("<<"),LSHFT_ASSIGN("<<="), LRSHFT("<<<"), LHSHFT_ASSIGN("<<<="), LT_ASSIGN("<="),
+    LE("<="), LNOT("!"), MINUS("-"), PLUS("+"), PLUS_ASSIGN("+="), STAR("*"),QUESTION("?"),
+    NOTEQ("!="),DIV_ASSIGN("/="), MINUS_ASSIGN("-="),STAR_ASSIGN("*="),REM_ASSIGN("%=")
+    ,RSHFT_ASSIGN(">>="), TRSHFT(">>>"), THSHFT_ASSIGN(">>>="), GT_ASSIGN(">="),
+    LSHFT_ASSIGN("<<="), LRSHFT("<<<"), LHSHFT_ASSIGN("<<<="), LT_ASSIGN("<="),
     BTXOR_ASSIGN("^="),BTOR_ASSIGN("|="), LOR("||"), BTAND_ASSIGN("&="),    
+    DIV("/"), REM("%"), UCOMP("~"), BTAND("&"), BTOR("|"), BTXOR("^"), SHL("<<"),
+    SHR(">>"),
 
     // Separators
     LPAREN("("), RPAREN(")"), LCURLY("{"), RCURLY("}"), LBRACK("["), 
