@@ -78,6 +78,8 @@ BTAND       ::= "&"
 BTOR        ::= "|"
 BTXOR       ::= "^"
 UCOMP       ::= "~"
+SHL         ::= "<<"
+SHR         ::= ">>"
 
 // Separators
 COMMA       ::= ","
