@@ -1202,6 +1202,7 @@ public class Parser {
      * <pre>
      *   unaryExpression ::= INC unaryExpression // level 1
      *                     | MINUS unaryExpression
+     *                     | PLUS unaryExpression
      *                     | simpleUnaryExpression
      * </pre>
      * 
@@ -1210,7 +1211,9 @@ public class Parser {
 
     private JExpression unaryExpression() {
         int line = scanner.token().line();
-        if (have(INC)) {
+        if(have(PLUS)){
+            return new JUnaryPlusOp(line, unaryExpression());
+        } else if (have(INC)) {
             return new JPreIncrementOp(line, unaryExpression());
         } else if (have(MINUS)) {
             return new JNegateOp(line, unaryExpression());
