@@ -1259,7 +1259,7 @@ public class Parser {
      * Parse a postfix expression.
      * 
      * <pre>
-     *   postfixExpression ::= primary {selector} {DEC}
+     *   postfixExpression ::= primary {selector} {DEC | INC}
      * </pre>
      * 
      * @return an AST for a postfixExpression.
@@ -1273,6 +1273,9 @@ public class Parser {
         }
         while (have(DEC)) {
             primaryExpr = new JPostDecrementOp(line, primaryExpr);
+        }
+        while (have(INC)) {
+            primaryExpr = new JPostIncrementOp(line, primaryExpr);
         }
         return primaryExpr;
     }
