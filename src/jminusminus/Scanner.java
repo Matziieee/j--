@@ -138,7 +138,19 @@ class Scanner {
                     while (ch != '\n' && ch != EOFCH) {
                         nextCh();
                     }
-                } else {
+                } else if(ch == '*'){
+                    char previous = ch;
+                    nextCh();
+                    while (ch != EOFCH){
+                        previous = ch;
+                        nextCh();
+                        if(previous == '*' && ch == '/'){
+                            nextCh();
+                            break;
+                        }
+                    }
+                }
+                else {
                    return new TokenInfo(DIV,line);
                 }
             } else {

@@ -16,7 +16,7 @@ public class UnaryComplementTest extends TestCase {
         super.tearDown();
     }
 
-    public void testBitAnd() {
+    public void testUnaryComplement() {
         this.assertEquals(unaryComplement.reverse(5), -6);
         this.assertEquals(unaryComplement.reverse(10), -11);
         this.assertEquals(unaryComplement.reverse(20), -21);
