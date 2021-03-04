@@ -105,8 +105,8 @@ relationalExpression ::= shiftExpression       // level 5
                            | INSTANCEOF referenceType]
 
 shiftExpression      ::= additiveExpression
-                          {(RSHFT | TRSHFT | 
-                            LSHFT | TLSHFT) additiveExpression}
+                          {(SHR | TRSHFT | 
+                            SHL | TLSHFT) additiveExpression}
 
 additiveExpression ::= multiplicativeExpression // level 3
                          {(PLUS | MINUS) multiplicativeExpression}
