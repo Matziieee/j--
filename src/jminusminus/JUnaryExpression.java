@@ -381,7 +381,16 @@ class JUnaryPlusOp extends JUnaryExpression{
     }
 
     public void codegen(CLEmitter output){
+        String ifLbl = output.createLabel();
+        String endIf = output.createLabel();
         arg.codegen(output);
+        output.addBranchInstruction(IFGE,ifLbl);
         output.addNoArgInstruction(INEG);
+        output.addBranchInstruction(GOTO, endIf);
+        output.addLabel(ifLbl);
+        output.addNoArgInstruction(ICONST_M1);
+        output.addNoArgInstruction(IMUL);
+        output.addLabel(endIf);
+        
     }
 }
