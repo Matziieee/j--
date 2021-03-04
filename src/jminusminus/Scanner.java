@@ -212,7 +212,14 @@ class Scanner {
             return new TokenInfo(UCOMP, line);
         case '|':
             nextCh();
-            return new TokenInfo(BTOR, line);
+            if (ch == '|') {
+                nextCh();
+                // return new TokenInfo(LOR, line);
+                reportScannerError("Operator || is not supported in j--.");
+
+            } else {
+                return new TokenInfo(BTOR, line);
+            }
         case '^':
             nextCh();
             return new TokenInfo(BTXOR, line);
