@@ -252,7 +252,7 @@ class Scanner {
             else{
                 return new TokenInfo(GT, line);
             }
-            case '<':
+         case '<':
             nextCh();
             if (ch == '=') {
                 nextCh();
