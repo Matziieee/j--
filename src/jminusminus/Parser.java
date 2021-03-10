@@ -1127,9 +1127,9 @@ public class Parser {
         int line = scanner.token().line();
         JExpression lhs = additiveExpression();
         if (have(GT)) {
-            return new JGreaterThanOp(line, lhs, additiveExpression());
+            return new JGreaterThanOp(line, lhs, shiftExpression());
         } else if (have(LE)) {
-            return new JLessEqualOp(line, lhs, additiveExpression());
+            return new JLessEqualOp(line, lhs, shiftExpression());
         } else if (have(INSTANCEOF)) {
             return new JInstanceOfOp(line, lhs, referenceType());
         } else {
@@ -1137,6 +1137,29 @@ public class Parser {
         }
     }
 
+    /* Parse shift operations                // level 4
+    <<,>>,>>>
+    */
+
+    private JExpression shiftExpression() {
+        int line = scanner.token().line();
+        boolean more = true;
+        JExpression lhs = additiveExpression();
+        while (more) {
+            if (have(SHL)) {
+                lhs = new JShiftLeftOp(line, lhs, additiveExpression());
+            } 
+            else if (have(SHR)){
+                lhs = new JShiftRightOp(line, lhs, additiveExpression());
+            }
+            else{
+                more = false;
+            }
+        }
+        return lhs;
+    }
+
+    
     /**
      * Parse an additive expression.
      * 
@@ -1202,6 +1225,7 @@ public class Parser {
      * <pre>
      *   unaryExpression ::= INC unaryExpression // level 1
      *                     | MINUS unaryExpression
+     *                     | PLUS unaryExpression
      *                     | simpleUnaryExpression
      * </pre>
      * 
@@ -1210,7 +1234,9 @@ public class Parser {
 
     private JExpression unaryExpression() {
         int line = scanner.token().line();
-        if (have(INC)) {
+        if(have(PLUS)){
+            return new JUnaryPlusOp(line, unaryExpression());
+        } else if (have(INC)) {
             return new JPreIncrementOp(line, unaryExpression());
         } else if (have(MINUS)) {
             return new JNegateOp(line, unaryExpression());
@@ -1483,6 +1509,11 @@ public class Parser {
             return new JWildExpression(line);
         }
     }
+
+/*    private JExpression ternaryExpression() {
+        int line = scanner.token().line();
+        if(have(QUESTION))
+    }*/
 
     // A tracing aid. Invoke to debug the parser to see what token
     // is being parsed at that point.

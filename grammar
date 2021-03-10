@@ -70,8 +70,20 @@ statementExpression ::= expression // but must have side-effect, eg i++
 
 expression ::= assignmentExpression
 
-assignmentExpression ::= conditionalAndExpression  // must be a valid lhs
-                           [(ASSIGN | PLUS_ASSIGN) assignmentExpression]
+assignmentExpression ::= ternaryExpression  // must be a valid lhs
+                           [(ASSIGN | PLUS_ASSIGN |
+                           MINUS_ASSIGN | STAR_ASSIGN |
+                           DIV_ASSIGN |REM_ASSIGN |
+                           BTAND_ASSIGN |BTOR_ASSIGN |
+                           BTXOR_ASSIGN |RSHFT_ASSIGN |
+                           TRSHFT_ASSIGN |LSHFT_ASSIGN
+                           |TLSHFT_ASSIGN) assignmentExpression]
+
+ternaryExpression ::= conditionalOrExpression
+                          {(QUESTION | COLON) conditionalOrExpression}
+
+conditionalOrExpression  ::= conditionalAndExpression
+                               {LOR conditionalAndExpression}
 
 conditionalAndExpression ::= equalityExpression // level 10
                                {LAND equalityExpression}
@@ -88,9 +100,13 @@ bitwiseOrExpression ::= equalityExpression // level 7
 equalityExpression ::= relationalExpression  // level 6
                          {EQUAL relationalExpression}
 
-relationalExpression ::= additiveExpression       // level 5
-                           [(GT | LE) additiveExpression
+relationalExpression ::= shiftExpression       // level 5
+                           [(GT | LE) shiftExpression
                            | INSTANCEOF referenceType]
+
+shiftExpression      ::= additiveExpression
+                          {(SHR | TRSHFT | 
+                            SHL | TLSHFT) additiveExpression}
 
 additiveExpression ::= multiplicativeExpression // level 3
                          {(PLUS | MINUS) multiplicativeExpression}
@@ -98,8 +114,13 @@ additiveExpression ::= multiplicativeExpression // level 3
 multiplicativeExpression ::= unaryExpression       // level 2
                                {(STAR | DIV | REM) unaryExpression}
 
+<<<<<<< HEAD
 unaryExpression ::= {INC | DEC}  unaryExpression  // level 1
                   | {MINUS | UCOMP } unaryExpression
+=======
+unaryExpression ::= INC unaryExpression  // level 1
+                  | {MINUS | UCOMP | PLUS} unaryExpression
+>>>>>>> c981d34c70ab8598caf25e48c37c559328ec92c3
                   | simpleUnaryExpression
 
 simpleUnaryExpression ::= LNOT unaryExpression

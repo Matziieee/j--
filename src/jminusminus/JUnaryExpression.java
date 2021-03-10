@@ -449,3 +449,30 @@ class JUnaryCompOp extends JUnaryExpression {
         
     }
 }
+
+class JUnaryPlusOp extends JUnaryExpression{
+    public JUnaryPlusOp (int line, JExpression arg){
+        super(line, "+", arg);
+    }
+
+    public JExpression analyze(Context context){
+        arg = arg.analyze(context);
+        arg.type().mustMatchExpected(line(), Type.INT);
+        type = Type.INT;
+        return this;
+    }
+
+    public void codegen(CLEmitter output){
+        String ifLbl = output.createLabel();
+        String endIf = output.createLabel();
+        arg.codegen(output);
+        output.addBranchInstruction(IFGE,ifLbl);
+        output.addNoArgInstruction(INEG);
+        output.addBranchInstruction(GOTO, endIf);
+        output.addLabel(ifLbl);
+        output.addNoArgInstruction(ICONST_M1);
+        output.addNoArgInstruction(IMUL);
+        output.addLabel(endIf);
+        
+    }
+}
