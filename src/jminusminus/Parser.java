@@ -499,7 +499,11 @@ public class Parser {
         Type superClass;
         if (have(EXTENDS)) {
             superClass = qualifiedIdentifier();
-        } else {
+        } 
+        else if(have(IMPLEMENTS)){
+            superClass = qualifiedIdentifier();
+        }
+        else {
             superClass = Type.OBJECT;
         }
         return new JClassDeclaration(line, mods, name, superClass, classBody());
