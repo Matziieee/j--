@@ -1523,7 +1523,7 @@ public class Parser {
 
     private JExpression ternaryExpression() {
         int line = scanner.token().line();
-        JExpression lhs = conditionalAndExpression();
+        JExpression lhs = conditionalOrExpression();
         boolean more = true;
         if(have(QUESTION)){
             return new JConditionalIfExpression(line, lhs, ternaryExpression());
@@ -1534,6 +1534,14 @@ public class Parser {
         return lhs;
     }
 
+    private JExpression conditionalOrExpression(){
+        int line = scanner.token().line();
+        JExpression lhs = conditionalAndExpression();
+        if(have(LOR)){
+            lhs = new JLogicalOrOp(line,lhs,conditionalAndExpression());
+        }
+        return lhs;
+    }
     // A tracing aid. Invoke to debug the parser to see what token
     // is being parsed at that point.
     //

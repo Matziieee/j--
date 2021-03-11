@@ -233,7 +233,7 @@ class Scanner {
             if (ch == '|') {
                 nextCh();
                 // return new TokenInfo(LOR, line);
-                reportScannerError("Operator || is not supported in j--.");
+                return new TokenInfo(LOR,line);
 
             } else {
                 return new TokenInfo(BTOR, line);
