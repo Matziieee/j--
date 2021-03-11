@@ -1154,13 +1154,15 @@ public class Parser {
             else if (have(SHR)){
                 lhs = new JShiftRightOp(line, lhs, additiveExpression());
             }
+            else if (have(USHR)){
+                lhs = new JUnShiftRightOp(line, lhs, additiveExpression());
+            }
             else{
                 more = false;
             }
         }
         return lhs;
     }
-
     
     /**
      * Parse an additive expression.
