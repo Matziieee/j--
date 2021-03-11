@@ -99,6 +99,7 @@ TLSHFT_ASSIGN::= "<<<="
 QUESTION    ::= "?"
 SHL         ::= "<<"
 SHR         ::= ">>"
+IUSHR       ::= ">>>"
 
 // Separators
 COMMA       ::= ","
