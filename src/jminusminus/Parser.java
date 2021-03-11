@@ -4,6 +4,8 @@ package jminusminus;
 
 import java.util.ArrayList;
 
+import java.lang.System;
+
 import static jminusminus.TokenKind.*;
 
 /**
@@ -1008,7 +1010,7 @@ public class Parser {
 
     private JExpression assignmentExpression() {
         int line = scanner.token().line();
-        JExpression lhs = conditionalAndExpression();
+        JExpression lhs = ternaryExpression();
         if (have(ASSIGN)) {
             return new JAssignOp(line, lhs, assignmentExpression());
         } else if (have(PLUS_ASSIGN)) {
@@ -1519,10 +1521,18 @@ public class Parser {
         }
     }
 
-/*    private JExpression ternaryExpression() {
+    private JExpression ternaryExpression() {
         int line = scanner.token().line();
-        if(have(QUESTION))
-    }*/
+        JExpression lhs = conditionalAndExpression();
+        boolean more = true;
+        if(have(QUESTION)){
+            return new JConditionalIfExpression(line, lhs, ternaryExpression());
+        }
+        else if (have(COLON)){
+            return new JConditionalElseExpression(line, lhs, ternaryExpression());
+        }
+        return lhs;
+    }
 
     // A tracing aid. Invoke to debug the parser to see what token
     // is being parsed at that point.
