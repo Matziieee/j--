@@ -31,6 +31,7 @@ public class JMinusMinusTestRunner {
         suite.addTestSuite(MultilineCommentTest.class);
         suite.addTestSuite(ShiftLeftTest.class);
         suite.addTestSuite(ShiftRightTest.class);
+        suite.addTestSuite(UnShiftRightTest.class);
         suite.addTestSuite(PrePostOperationsTest.class);
         return suite;
     }
