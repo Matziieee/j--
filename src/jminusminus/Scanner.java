@@ -253,7 +253,14 @@ class Scanner {
             nextCh();
             if (ch == '>'){
                 nextCh();
-                return new TokenInfo(SHR, line);
+                if (ch == '>'){
+                    nextCh();
+                    return new TokenInfo(USHR, line);
+                }
+                else{
+                    nextCh();
+                    return new TokenInfo(SHR, line);
+                }
             }
             else{
                 return new TokenInfo(GT, line);

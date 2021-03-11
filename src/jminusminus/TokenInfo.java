@@ -33,7 +33,7 @@ enum TokenKind {
     LSHFT_ASSIGN("<<="), LRSHFT("<<<"), LHSHFT_ASSIGN("<<<="), LT_ASSIGN("<="),
     BTXOR_ASSIGN("^="),BTOR_ASSIGN("|="), LOR("||"), BTAND_ASSIGN("&="),    
     DIV("/"), REM("%"), UCOMP("~"), BTAND("&"), BTOR("|"), BTXOR("^"), SHL("<<"),
-    SHR(">>"),
+    SHR(">>"), USHR(">>>"),
 
     // Separators
     LPAREN("("), RPAREN(")"), LCURLY("{"), RCURLY("}"), LBRACK("["), 

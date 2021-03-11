@@ -1133,7 +1133,7 @@ public class Parser {
 
     private JExpression relationalExpression() {
         int line = scanner.token().line();
-        JExpression lhs = additiveExpression();
+        JExpression lhs = shiftExpression();
         if (have(GT)) {
             return new JGreaterThanOp(line, lhs, shiftExpression());
         } else if (have(LE)) {
@@ -1160,13 +1160,15 @@ public class Parser {
             else if (have(SHR)){
                 lhs = new JShiftRightOp(line, lhs, additiveExpression());
             }
+            else if (have(USHR)){
+                lhs = new JUnShiftRightOp(line, lhs, additiveExpression());
+            }
             else{
                 more = false;
             }
         }
         return lhs;
     }
-
     
     /**
      * Parse an additive expression.
