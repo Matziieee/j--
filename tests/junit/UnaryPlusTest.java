@@ -16,9 +16,8 @@ public class UnaryPlusTest extends TestCase{
         super.tearDown();
     }
 
-    public void testBitAnd() {
-        this.assertEquals(5, unaryPlus.uPlus(-5));
-        this.assertEquals(10, unaryPlus.uPlus(-10));
+    public void testUnaryPlus() {
+        this.assertEquals(-10, unaryPlus.uPlus(-10));
         this.assertEquals(1,unaryPlus.uPlus(1));
     }
 }
