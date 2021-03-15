@@ -1,4 +1,4 @@
-R// Copyright 2013 Bill Campbell, Swami Iyer and Bahar Akbal-Delibas
+// Copyright 2013 Bill Campbell, Swami Iyer and Bahar Akbal-Delibas
 
 package jminusminus;
 
@@ -1001,6 +1001,9 @@ public class Parser {
      *       conditionalAndExpression // level 13
      *           [( ASSIGN  // conditionalExpression
      *            | PLUS_ASSIGN // must be valid lhs
+     *            | STAR_ASSIGN // must be valid lhs
+     *            | MINUS_ASSIGN // must be valid lhs
+     *            | DIV_ASSIGN // must be valid lhs
      *            )
      *            assignmentExpression]
      * </pre>
