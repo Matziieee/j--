@@ -405,6 +405,12 @@ public class Parser {
 
     private JAST typeDeclaration() {
         ArrayList<String> mods = modifiers();
+        scanner.recordPosition();
+        if(have(INTERFACE)){
+            scanner.returnToPosition();
+            return interfaceDeclaration(mods);
+        }
+        scanner.returnToPosition();
         return classDeclaration(mods);
     }
 
@@ -511,6 +517,21 @@ public class Parser {
         return new JClassDeclaration(line, mods, name, superClass, classBody());
     }
 
+    private JInterfaceDeclaration interfaceDeclaration(ArrayList<String> mods){
+        int line = scanner.token().line();
+        mustBe(INTERFACE);
+        mustBe(IDENTIFIER);
+        String name = scanner.previousToken().image();
+        Type superInterface;
+        if(have(IMPLEMENTS)){
+            superInterface = qualifiedIdentifier();
+        }
+        else {
+            superInterface = Type.OBJECT;
+        }
+        return new JInterfaceDeclaration(line,mods,name, superInterface, interfaceBody());
+    }
+
     /**
      * Parse a class body.
      * 
@@ -533,6 +554,45 @@ public class Parser {
         return members;
     }
 
+    private ArrayList<JMember> interfaceBody(){
+        ArrayList<JMember> members = new ArrayList<JMember>();
+        mustBe(LCURLY);
+        while(!see(RCURLY) && !see(EOF)){
+            members.add(interfaceMethodDecl(modifiers()));
+        }
+        //todo add while here and get all methods
+        mustBe(RCURLY);
+        return members;
+    }
+
+    private JMember interfaceMethodDecl(ArrayList<String> mods){
+        int line = scanner.token().line();
+        //mods is always only abstract
+        JMember memberDecl = null;
+        Type type = null;
+        if (have(VOID)) {
+            // void method
+            type = Type.VOID;
+            mustBe(IDENTIFIER);
+            String name = scanner.previousToken().image();
+            ArrayList<JFormalParameter> params = formalParameters();
+            JBlock body = have(SEMI) ? null : block();
+            memberDecl = new JMethodDeclaration(line, mods, name, type,
+                    params, null);
+        } else {
+            type = type();
+            if (seeIdentLParen()) {
+                // Non void method
+                mustBe(IDENTIFIER);
+                String name = scanner.previousToken().image();
+                ArrayList<JFormalParameter> params = formalParameters();
+                JBlock body = have(SEMI) ? null : block();
+                memberDecl = new JMethodDeclaration(line, mods, name, type,
+                        params, null);
+            }
+        }
+        return memberDecl;
+    }
     /**
      * Parse a member declaration.
      * 
