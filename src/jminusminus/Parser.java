@@ -1,4 +1,4 @@
-// Copyright 2013 Bill Campbell, Swami Iyer and Bahar Akbal-Delibas
+R// Copyright 2013 Bill Campbell, Swami Iyer and Bahar Akbal-Delibas
 
 package jminusminus;
 
@@ -1014,6 +1014,12 @@ public class Parser {
         if (have(ASSIGN)) {
             return new JAssignOp(line, lhs, assignmentExpression());
         } else if (have(PLUS_ASSIGN)) {
+            return new JPlusAssignOp(line, lhs, assignmentExpression());
+        } else if (have(STAR_ASSIGN)) {
+            return new JPlusAssignOp(line, lhs, assignmentExpression());
+        } else if (have(MINUS_ASSIGN)) {
+            return new JPlusAssignOp(line, lhs, assignmentExpression());
+        } else if (have(DIV_ASSIGN)) {
             return new JPlusAssignOp(line, lhs, assignmentExpression());
         } else {
             return lhs;

@@ -114,13 +114,8 @@ additiveExpression ::= multiplicativeExpression // level 3
 multiplicativeExpression ::= unaryExpression       // level 2
                                {(STAR | DIV | REM) unaryExpression}
 
-<<<<<<< HEAD
-unaryExpression ::= {INC | DEC}  unaryExpression  // level 1
-                  | {MINUS | UCOMP } unaryExpression
-=======
-unaryExpression ::= INC unaryExpression  // level 1
+unaryExpression ::= { INC | DEC } unaryExpression  // level 1
                   | {MINUS | UCOMP | PLUS} unaryExpression
->>>>>>> c981d34c70ab8598caf25e48c37c559328ec92c3
                   | simpleUnaryExpression
 
 simpleUnaryExpression ::= LNOT unaryExpression
