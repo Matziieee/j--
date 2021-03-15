@@ -1061,6 +1061,9 @@ public class Parser {
      *       conditionalAndExpression // level 13
      *           [( ASSIGN  // conditionalExpression
      *            | PLUS_ASSIGN // must be valid lhs
+     *            | STAR_ASSIGN // must be valid lhs
+     *            | MINUS_ASSIGN // must be valid lhs
+     *            | DIV_ASSIGN // must be valid lhs
      *            )
      *            assignmentExpression]
      * </pre>
@@ -1074,6 +1077,12 @@ public class Parser {
         if (have(ASSIGN)) {
             return new JAssignOp(line, lhs, assignmentExpression());
         } else if (have(PLUS_ASSIGN)) {
+            return new JPlusAssignOp(line, lhs, assignmentExpression());
+        } else if (have(STAR_ASSIGN)) {
+            return new JPlusAssignOp(line, lhs, assignmentExpression());
+        } else if (have(MINUS_ASSIGN)) {
+            return new JPlusAssignOp(line, lhs, assignmentExpression());
+        } else if (have(DIV_ASSIGN)) {
             return new JPlusAssignOp(line, lhs, assignmentExpression());
         } else {
             return lhs;

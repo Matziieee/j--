@@ -133,7 +133,10 @@ class Scanner {
             }
             if (ch == '/') {
                 nextCh();
-                if (ch == '/') {
+                if (ch == '=') {
+                    nextCh();
+                    return new TokenInfo(DIV_ASSIGN, line);
+                } else if (ch == '/') {
                     // CharReader maps all new lines to '\n'
                     while (ch != '\n' && ch != EOFCH) {
                         nextCh();
@@ -205,7 +208,12 @@ class Scanner {
             return new TokenInfo(LNOT, line);
         case '*':
             nextCh();
-            return new TokenInfo(STAR, line);
+            if (ch == '=') {
+                nextCh();
+                return new TokenInfo(STAR_ASSIGN, line);
+            } else {
+                return new TokenInfo(STAR, line);
+            }
         case '+':
             nextCh();
             if (ch == '=') {
@@ -219,7 +227,10 @@ class Scanner {
             }
         case '-':
             nextCh();
-            if (ch == '-') {
+            if (ch == '=') {
+                nextCh();
+                return new TokenInfo(MINUS_ASSIGN, line);
+            } else if (ch == '-') {
                 nextCh();
                 return new TokenInfo(DEC, line);
             } else {
