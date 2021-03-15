@@ -1,0 +1,285 @@
+Buildfile: /home/maciek/inf/compiler-construction/project/j--/build.xml
+
+compile:
+     [echo] Compiling j-- source files...
+
+compileSPIM:
+     [echo] Compiling j-- source files...
+
+jar:
+     [echo] Bundling class files into jar files...
+
+runCompilerTests:
+     [echo] Compiling and running j-- (JVM) programs...
+    [junit] Running junit.JMinusMinusTest
+    [junit] Testsuite: junit.JMinusMinusTest
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/MultilineComment.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/ShiftRight.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Kast.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Interface.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/pass/Interface.java:3: interface found where class sought
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/UnaryComplement.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Classes.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Animalia.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/ConditionalExpression.java ...
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/Remainder.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/Remainder.java:7: Type char doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnaryPlus.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnaryPlus.java:7: Type java.lang.String doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnShiftRight.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnShiftRight.java:7: Type char doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseXor.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseXor.java:7: Type char doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseOr.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseOr.java:7: Type char doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/TypeErrors.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/TypeErrors.java:14: Type int doesn't match type boolean
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/Division.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/Division.java:8: Type char doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseAnd.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseAnd.java:8: Type char doesn't match type int
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:14: Literal sought where for found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:14: Invalid statement expression; it does not have a side-effect
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:17: Type sought where return found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: void found where class sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: ( found where { sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: Type sought where ( found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: [ found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: Type sought where [ found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: ) found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: Type sought where ) found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:22: ( found where <IDENTIFIER> sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:25: } found where class sought
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java ...
+    [junit] 
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:11: Unidentified input token: '#'
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:11: . found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:11: Type sought where . found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: ( found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: Type sought where ( found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: [ found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: Type sought where [ found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: ) found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: Type sought where ) found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: . found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: Type sought where . found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: . found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: Type sought where . found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: ( found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: Type sought where ( found
+    [junit] 
+    [junit] 
+    [junit] Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.156 sec
+    [junit] Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.156 sec
+    [junit] ------------- Standard Output ---------------
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/MultilineComment.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/ShiftRight.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Kast.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Interface.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/UnaryComplement.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Classes.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/Animalia.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/pass/ConditionalExpression.java ...
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/Remainder.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnaryPlus.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnShiftRight.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseXor.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseOr.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/TypeErrors.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/Division.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseAnd.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] Running j-- (with handwritten frontend) on /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java ...
+    [junit] 
+    [junit] 
+    [junit] 
+    [junit] ------------- ---------------- ---------------
+    [junit] ------------- Standard Error -----------------
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/pass/Interface.java:3: interface found where class sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/Remainder.java:7: Type char doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnaryPlus.java:7: Type java.lang.String doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/UnShiftRight.java:7: Type char doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseXor.java:7: Type char doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseOr.java:7: Type char doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/TypeErrors.java:14: Type int doesn't match type boolean
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/Division.java:8: Type char doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/BitwiseAnd.java:8: Type char doesn't match type int
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:14: Literal sought where for found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:14: Invalid statement expression; it does not have a side-effect
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:17: Type sought where return found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: void found where class sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: ( found where { sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: Type sought where ( found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: [ found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: Type sought where [ found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: ) found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:20: Type sought where ) found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:22: ( found where <IDENTIFIER> sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/SyntaxErrors.java:25: } found where class sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:11: Unidentified input token: '#'
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:11: . found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:11: Type sought where . found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: ( found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: Type sought where ( found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: [ found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: Type sought where [ found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: ) found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:12: Type sought where ) found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: . found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: Type sought where . found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: . found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: Type sought where . found
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: ( found where ; sought
+    [junit] /home/maciek/inf/compiler-construction/project/j--/tests/fail/LexicalErrors.java:13: Type sought where ( found
+    [junit] ------------- ---------------- ---------------
+    [junit] 
+    [junit] Testcase: testPass took 0.129 sec
+    [junit] 	Caused an ERROR
+    [junit] Cannot invoke "jminusminus.Type.mustMatchExpected(int, jminusminus.Type)" because the return value of "jminusminus.JExpression.type()" is null
+    [junit] java.lang.NullPointerException: Cannot invoke "jminusminus.Type.mustMatchExpected(int, jminusminus.Type)" because the return value of "jminusminus.JExpression.type()" is null
+    [junit] 	at jminusminus.JReturnStatement.analyze(JReturnStatement.java:74)
+    [junit] 	at jminusminus.JReturnStatement.analyze(JReturnStatement.java:13)
+    [junit] 	at jminusminus.JBlock.analyze(JBlock.java:62)
+    [junit] 	at jminusminus.JMethodDeclaration.analyze(JMethodDeclaration.java:158)
+    [junit] 	at jminusminus.JClassDeclaration.analyze(JClassDeclaration.java:203)
+    [junit] 	at jminusminus.JCompilationUnit.analyze(JCompilationUnit.java:190)
+    [junit] 	at jminusminus.Main.main(Main.java:138)
+    [junit] 	at junit.JMinusMinusTest.testPass(JMinusMinusTest.java:43)
+    [junit] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    [junit] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+    [junit] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    [junit] 	at jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+    [junit] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    [junit] 
+    [junit] Testcase: testFail took 0.023 sec
+    [javac] Compiling 6 source files to /home/maciek/inf/compiler-construction/project/j--/classes
+    [javac] /home/maciek/inf/compiler-construction/project/j--/tests/junit/ShiftLeftTest.java:4: error: cannot find symbol
+    [javac] import pass.ShiftLeft;
+    [javac]            ^
+    [javac]   symbol:   class ShiftLeft
+    [javac]   location: package pass
+    [javac] /home/maciek/inf/compiler-construction/project/j--/tests/junit/ShiftLeftTest.java:7: error: cannot find symbol
+    [javac]     private ShiftLeft shiftLeft;
+    [javac]             ^
+    [javac]   symbol:   class ShiftLeft
+    [javac]   location: class ShiftLeftTest
+    [javac] /home/maciek/inf/compiler-construction/project/j--/tests/junit/UnShiftRightTest.java:4: error: cannot find symbol
+    [javac] import pass.UnShiftRight;
+    [javac]            ^
+    [javac]   symbol:   class UnShiftRight
+    [javac]   location: package pass
+    [javac] /home/maciek/inf/compiler-construction/project/j--/tests/junit/UnShiftRightTest.java:7: error: cannot find symbol
+    [javac]     private UnShiftRight unShiftRight;
+    [javac]             ^
+    [javac]   symbol:   class UnShiftRight
+    [javac]   location: class UnShiftRightTest
+    [javac] /home/maciek/inf/compiler-construction/project/j--/tests/junit/ShiftLeftTest.java:11: error: cannot find symbol
+    [javac]         shiftLeft = new ShiftLeft();
+    [javac]                         ^
+    [javac]   symbol:   class ShiftLeft
+    [javac]   location: class ShiftLeftTest
+    [javac] /home/maciek/inf/compiler-construction/project/j--/tests/junit/UnShiftRightTest.java:11: error: cannot find symbol
+    [javac]         unShiftRight = new UnShiftRight();
+    [javac]                            ^
+    [javac]   symbol:   class UnShiftRight
+    [javac]   location: class UnShiftRightTest
+    [javac] 6 errors
