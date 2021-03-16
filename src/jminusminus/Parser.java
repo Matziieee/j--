@@ -703,6 +703,7 @@ public class Parser {
      *               | WHILE parExpression statement 
      *               | RETURN [expression] SEMI
      *               | SEMI 
+                     | THROW expression
      *               | statementExpression SEMI
      * </pre>
      * 
@@ -722,10 +723,13 @@ public class Parser {
             JExpression test = parExpression();
             JStatement statement = statement();
             return new JWhileStatement(line, test, statement);
+        } else if (have(THROW)){
+            JExpression throwEx = expression();
+            return new JThrowStatement(line, throwEx);
         } else if (have(RETURN)) {
             if (have(SEMI)) {
                 return new JReturnStatement(line, null);
-            } else {
+         } else {
                 JExpression expr = expression();
                 mustBe(SEMI);
                 return new JReturnStatement(line, expr);
