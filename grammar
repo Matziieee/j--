@@ -34,6 +34,7 @@ statement ::= block
             | WHILE parExpression statement 
             | RETURN [expression] SEMI
             | SEMI 
+            | THROW expression
             | statementExpression SEMI
 
 formalParameters ::= LPAREN 
