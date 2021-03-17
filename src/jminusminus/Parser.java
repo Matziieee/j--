@@ -548,15 +548,24 @@ public class Parser {
         ArrayList<JMember> members = new ArrayList<JMember>();
         mustBe(LCURLY);
         while (!see(RCURLY) && !see(EOF)) {
-            if(see(LCURLY)){
-                scanner.next();
 
-                while(!see(RCURLY) && !see(EOF)){
-                    members.add(blockVariableDecl(modifiers()));
+
+             if(see(STATIC)){
+                scanner.recordPosition();
+                scanner.next();
+                if(see(LCURLY)){
+                    ArrayList<String> mods = modifiers();
+                    mods.add("STATIC");
+                    members.add(blockContructorsDecl(mods));
+                } else {
+                    scanner.returnToPosition();
                 }
-                mustBe(RCURLY);
             }
-            members.add(memberDecl(modifiers()));
+            if (see(LCURLY)){
+                members.add(blockContructorsDecl(modifiers()));
+            } else {
+                members.add(memberDecl(modifiers()));
+            }
         }
         mustBe(RCURLY);
         return members;
@@ -566,14 +575,7 @@ public class Parser {
         ArrayList<JMember> members = new ArrayList<JMember>();
         mustBe(LCURLY);
         while(!see(RCURLY) && !see(EOF)){
-            if(see(LCURLY)){
-                scanner.next();
 
-                while(!see(RCURLY) && !see(EOF)){
-                    members.add(blockVariableDecl(modifiers()));
-                }
-                mustBe(RCURLY);
-            }
             members.add(interfaceMethodDecl(modifiers()));
         }
         //todo add while here and get all methods
@@ -610,30 +612,18 @@ public class Parser {
         return memberDecl;
     }
 
-        /**
-     * Parse a block variable declaration.
-     * 
-     * <pre>
-     *   memberDecl ::=  type variableDeclarators SEMI
-     * </pre>
-     * 
-     * @param mods
-     *            the class member modifiers.
-     * @return an AST for a memberDecl.
-     */
-
-    private JMember blockVariableDecl(ArrayList<String> mods){
+    private JMember blockContructorsDecl(ArrayList<String> mods){
         int line = scanner.token().line();
-        //mods is always only abstract
         JMember memberDecl = null;
-        Type type = null;
-        if (!have(VOID) && !seeIdentLParen()){
-            type = type();
-            memberDecl = new JFieldDeclaration(line, mods, variableDeclarators(type));
-            mustBe(SEMI);
-        }
+        // String name = scanner.previousToken().image();
+        // ArrayList<JFormalParameter> params = formalParameters();
+        JBlock body = block();
+        memberDecl = new JConstructorDeclaration(line, mods, null, new ArrayList<JFormalParameter>(),
+                body);
         return memberDecl; 
     }
+
+
     /**
      * Parse a member declaration.
      * 

@@ -5,12 +5,12 @@ import java.lang.System;
 public class InitialisationBlocks {
 
 
-    int x;
+    static int x;
     int otherInteger;
 
 
-    {
-        otherInteger = 10;
+    static {
+        x = 10;
 
     }
 
@@ -21,5 +21,7 @@ public class InitialisationBlocks {
 
     public static void main(String[] args){
 
+
+        System.out.println(x);
     }
 }
