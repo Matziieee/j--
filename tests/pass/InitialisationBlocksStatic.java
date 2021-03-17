@@ -2,7 +2,7 @@ package pass;
 
 import java.lang.System; 
 
-public class InitialisationBlocks {
+public class InitialisationBlocksStatic {
 
 
     static int x;
