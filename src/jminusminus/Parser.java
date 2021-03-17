@@ -610,13 +610,24 @@ public class Parser {
         return memberDecl;
     }
 
+        /**
+     * Parse a block variable declaration.
+     * 
+     * <pre>
+     *   memberDecl ::=  type variableDeclarators SEMI
+     * </pre>
+     * 
+     * @param mods
+     *            the class member modifiers.
+     * @return an AST for a memberDecl.
+     */
 
     private JMember blockVariableDecl(ArrayList<String> mods){
         int line = scanner.token().line();
         //mods is always only abstract
         JMember memberDecl = null;
         Type type = null;
-        if (!have(VOID)){
+        if (!have(VOID) && !seeIdentLParen()){
             type = type();
             memberDecl = new JFieldDeclaration(line, mods, variableDeclarators(type));
             mustBe(SEMI);
