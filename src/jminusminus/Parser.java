@@ -615,8 +615,6 @@ public class Parser {
     private JMember blockContructorsDecl(ArrayList<String> mods){
         int line = scanner.token().line();
         JMember memberDecl = null;
-        // String name = scanner.previousToken().image();
-        // ArrayList<JFormalParameter> params = formalParameters();
         JBlock body = block();
         memberDecl = new JConstructorDeclaration(line, mods, null, new ArrayList<JFormalParameter>(),
                 body);
