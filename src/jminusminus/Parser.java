@@ -548,6 +548,14 @@ public class Parser {
         ArrayList<JMember> members = new ArrayList<JMember>();
         mustBe(LCURLY);
         while (!see(RCURLY) && !see(EOF)) {
+            if(see(LCURLY)){
+                scanner.next();
+
+                while(!see(RCURLY) && !see(EOF)){
+                    members.add(blockVariableDecl(modifiers()));
+                }
+                mustBe(RCURLY);
+            }
             members.add(memberDecl(modifiers()));
         }
         mustBe(RCURLY);
@@ -558,6 +566,14 @@ public class Parser {
         ArrayList<JMember> members = new ArrayList<JMember>();
         mustBe(LCURLY);
         while(!see(RCURLY) && !see(EOF)){
+            if(see(LCURLY)){
+                scanner.next();
+
+                while(!see(RCURLY) && !see(EOF)){
+                    members.add(blockVariableDecl(modifiers()));
+                }
+                mustBe(RCURLY);
+            }
             members.add(interfaceMethodDecl(modifiers()));
         }
         //todo add while here and get all methods
@@ -592,6 +608,20 @@ public class Parser {
             }
         }
         return memberDecl;
+    }
+
+
+    private JMember blockVariableDecl(ArrayList<String> mods){
+        int line = scanner.token().line();
+        //mods is always only abstract
+        JMember memberDecl = null;
+        Type type = null;
+        if (!have(VOID)){
+            type = type();
+            memberDecl = new JFieldDeclaration(line, mods, variableDeclarators(type));
+            mustBe(SEMI);
+        }
+        return memberDecl; 
     }
     /**
      * Parse a member declaration.

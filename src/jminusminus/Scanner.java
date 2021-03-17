@@ -179,7 +179,22 @@ class Scanner {
             return new TokenInfo(RPAREN, line);
         case '{':
             nextCh();
-            return new TokenInfo(LCURLY, line);
+            // if (isIdentifierStart(ch)) {
+            //     buffer = new StringBuffer();
+            //     while (isIdentifierPart(ch)) {
+            //         buffer.append(ch);
+            //         nextCh();
+            //     }
+            //     String identifier = buffer.toString();
+            //     if (reserved.containsKey(identifier)) {
+            //         return new TokenInfo(reserved.get(identifier), line);
+            //     } else {
+            //         return new TokenInfo(IDENTIFIER, identifier, line);
+            //     }
+            // } else {
+            //     // nextCh();
+                return new TokenInfo(LCURLY, line);
+            // }
         case '}':
             nextCh();
             return new TokenInfo(RCURLY, line);
