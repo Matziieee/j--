@@ -43,7 +43,7 @@ enum TokenKind {
     IDENTIFIER("<IDENTIFIER>"), 
 
     // Literals
-    NULL("null"), FALSE("false"), TRUE("true"),
+    NULL("null"), FALSE("false"), TRUE("true"), DOUBLE_LITERAL("<DOUBLE_LITERAL>"),
     INT_LITERAL("<INT_LITERAL>"), CHAR_LITERAL("<CHAR_LITERAL>"), 
     STRING_LITERAL("<STRING_LITERAL>");
 
