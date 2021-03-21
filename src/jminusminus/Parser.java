@@ -548,23 +548,11 @@ public class Parser {
         ArrayList<JMember> members = new ArrayList<JMember>();
         mustBe(LCURLY);
         while (!see(RCURLY) && !see(EOF)) {
-
-
-             if(see(STATIC)){
-                scanner.recordPosition();
-                scanner.next();
-                if(see(LCURLY)){
-                    ArrayList<String> mods = modifiers();
-                    mods.add("STATIC");
-                    members.add(blockContructorsDecl(mods));
-                } else {
-                    scanner.returnToPosition();
-                }
-            }
-            if (see(LCURLY)){
-                members.add(blockContructorsDecl(modifiers()));
+            ArrayList<String> mods = modifiers();
+            if(see(LCURLY)){
+                members.add(blockContructorsDecl(mods));
             } else {
-                members.add(memberDecl(modifiers()));
+                members.add(memberDecl(mods));
             }
         }
         mustBe(RCURLY);
@@ -614,10 +602,8 @@ public class Parser {
 
     private JMember blockContructorsDecl(ArrayList<String> mods){
         int line = scanner.token().line();
-        JMember memberDecl = null;
         JBlock body = block();
-        memberDecl = new JConstructorDeclaration(line, mods, null, new ArrayList<JFormalParameter>(),
-                body);
+        JMember memberDecl = new JInitialisationBlocksDeclaration(line, mods, body);
         return memberDecl; 
     }
 
