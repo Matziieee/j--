@@ -1620,10 +1620,10 @@ public class Parser {
         JExpression lhs = conditionalOrExpression();
         boolean more = true;
         if(have(QUESTION)){
-            return new JConditionalIfExpression(line, lhs, ternaryExpression());
+            return new JConditionalExpressionCondition(line, lhs, ternaryExpression());
         }
         else if (have(COLON)){
-            return new JConditionalElseExpression(line, lhs, ternaryExpression());
+            return new JConditionalExpressionExpression(line, lhs, ternaryExpression());
         }
         return lhs;
     }
