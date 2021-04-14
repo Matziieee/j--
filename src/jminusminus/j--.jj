@@ -186,6 +186,9 @@ TOKEN: {
 | <LNOT: "!">
 | <MINUS: "-">
 | <PLUS_ASSIGN: "+=">
+| <MINUS_ASSIGN: "-=">
+| <STAR_ASSIGN: "*=">
+| <DIV_ASSIGN: "/=">
 | <STAR: "*">
 }
 
@@ -444,6 +447,7 @@ private JClassDeclaration classDeclaration(ArrayList<String> mods): {
 {
     try {
         <CLASS> { line = token.beginLine; }
+        // TODO: STATIC and NON STATIC BRACET INITIALIZATION
         <IDENTIFIER> { name = token.image; }
         [
             <EXTENDS> superClass = qualifiedIdentifier()
@@ -1146,6 +1150,7 @@ private JExpression assignmentExpression(): {
             rhs = assignmentExpression()
             { lhs = new JAssignOp(line, lhs, rhs); } |
             
+            // TODO: Asignment expressions
             <PLUS_ASSIGN>
             rhs = assignmentExpression()
             { lhs = new JPlusAssignOp(line, lhs, rhs); }
@@ -1339,6 +1344,7 @@ private JExpression unaryExpression(): {
 }
 {
     try {
+        // TODO : DECREASE UNARY
         <INC> { line = token.beginLine; }
         unaryExpr = unaryExpression()
         { expr = new JPreIncrementOp(line, unaryExpr); } |
@@ -1425,6 +1431,7 @@ private JExpression postfixExpression(): {
             primaryExpr = selector(primaryExpr)
         )*
         (
+            // TODO: POSTFIX INCREASE PARSING
             <DEC>
             { primaryExpr = new JPostDecrementOp(line, primaryExpr); }
         )*
