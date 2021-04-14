@@ -1161,7 +1161,6 @@ private JExpression assignmentExpression(): {
             rhs = assignmentExpression()
             { lhs = new JAssignOp(line, lhs, rhs); } |
             
-            // TODO: Change assignments to corresponding classes once they are written (in standaart parser as well)
             <PLUS_ASSIGN>
             rhs = assignmentExpression()
             { lhs = new JPlusAssignOp(line, lhs, rhs); } |
