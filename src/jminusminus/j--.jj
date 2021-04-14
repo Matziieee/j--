@@ -447,7 +447,6 @@ private JClassDeclaration classDeclaration(ArrayList<String> mods): {
 {
     try {
         <CLASS> { line = token.beginLine; }
-        // TODO: STATIC and NON STATIC BRACET INITIALIZATION
         <IDENTIFIER> { name = token.image; }
         [
             <EXTENDS> superClass = qualifiedIdentifier()
@@ -481,10 +480,22 @@ private ArrayList<JMember> classBody(): {
 }
 {
     try {
+        // TODO: STATIC and NON STATIC BRACET INITIALIZATION
         <LCURLY>
         (
             mods = modifiers()
             aMember = memberDecl(mods) { members.add(aMember); }
+        )* |
+        (
+            LOOKAHEAD([<STATIC>] <LCURLY> (<IDENTIFIER> <ASSIGN> expression())* <RCURLY>)
+            {
+                mods = modifiers()
+                body = block()
+                aMember = new JInitialisationBlocksDeclaration(line, mods, body) { members.add(aMember); }
+                
+
+            }
+
         )*
         <RCURLY>
     }
@@ -1150,10 +1161,22 @@ private JExpression assignmentExpression(): {
             rhs = assignmentExpression()
             { lhs = new JAssignOp(line, lhs, rhs); } |
             
-            // TODO: Asignment expressions
+            // TODO: Change assignments to corresponding classes once they are written (in standaart parser as well)
             <PLUS_ASSIGN>
             rhs = assignmentExpression()
-            { lhs = new JPlusAssignOp(line, lhs, rhs); }
+            { lhs = new JPlusAssignOp(line, lhs, rhs); } |
+            
+            <MINUS_ASSIGN>
+            rhs = assignmentExpression()
+            { lhs = new JPlusAssignOp(line, lhs, rhs); } |
+
+            <STAR_ASSIGN>
+            rhs = assignmentExpression()
+            { lhs = new JPlusAssignOp(line, lhs, rhs); } |
+
+            <DIV_ASSIGN>
+            rhs = assignmentExpression()
+            { lhs = new JPlusAssignOp(line, lhs, rhs); } 
         ]
     }
     catch (ParseException e) {
