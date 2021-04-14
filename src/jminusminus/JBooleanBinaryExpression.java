@@ -243,8 +243,8 @@ class JLogicalOrOp extends JBooleanBinaryExpression {
      *            should we branch on true?
      */
 
-    public void codegen(CLEmitter output, String targetLabel, boolean onTrue) {
-        /*if (onTrue) {
+    public void codegen(CLEmitter output, String targetLabel, boolean onTrue) {  
+        if (onTrue) {
             String falseLabel = output.createLabel();
             lhs.codegen(output, falseLabel, false);
             rhs.codegen(output, targetLabel, true);
@@ -252,7 +252,7 @@ class JLogicalOrOp extends JBooleanBinaryExpression {
         } else {
             lhs.codegen(output, targetLabel, false);
             rhs.codegen(output, targetLabel, false);
-        }*/
+        }
     }
 
 }
