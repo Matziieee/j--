@@ -1344,7 +1344,10 @@ private JExpression unaryExpression(): {
 }
 {
     try {
-        // TODO : DECREASE UNARY
+        <DEC> {line = token.beginLine; }
+        unaryExpr = unaryExpression()
+        { expr = new JPreDecrementOp(line, unaryExpr; ) } |
+
         <INC> { line = token.beginLine; }
         unaryExpr = unaryExpression()
         { expr = new JPreIncrementOp(line, unaryExpr); } |
