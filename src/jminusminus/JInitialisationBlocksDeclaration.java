@@ -19,22 +19,14 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
     public JInitialisationBlocksDeclaration(int line, ArrayList<String> mods, JBlock body)
     {
         // TODO: make sure that everything is in order here
-        super(line, mods, "TDOO: resolve the name issue", Type.VOID, new ArrayList<JFormalParameter>(), body);
-        // this.mods = mods;
-        // this.body = body;
-        // this.isAbstract = mods.contains("abstract");
-        // this.isStatic = mods.contains("static");
-        // this.isPrivate = mods.contains("private");
+        super(line, mods, "Initialisation block", Type.VOID, new ArrayList<JFormalParameter>(), body);
     }
     
     public void preAnalyze(Context context, CLEmitter partial) {
         super.preAnalyze(context, partial);
-        if (isStatic) {
+        if (isAbstract) {
             JAST.compilationUnit.reportSemanticError(line(),
-                    "Constructor cannot be declared static");
-        } else if (isAbstract) {
-            JAST.compilationUnit.reportSemanticError(line(),
-                    "Constructor cannot be declared abstract");
+                    "Initialisation block cannot be declared abstract");
         }
         // Generate the method with an empty body (for now)
         // NOTE: from method, not constructor, might be wrong
@@ -75,9 +67,23 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
         // make the class verifier happy.
         partial.addMethod(mods, name, descriptor, null, false);
 
+        partial.addNoArgInstruction(ALOAD_0);
+        partial.addMemberAccessInstruction(INVOKESPECIAL,
+                ((JTypeDecl) context.classContext().definition())
+                        .superType().jvmName(), "<init>", "()V");
+
         // Add implicit RETURN
         partial.addNoArgInstruction(RETURN);
     }
+
+    public void codegen(CLEmitter output) {
+        output.addMethod(mods, "<init>", descriptor, null, false);
+
+        // And then the body
+        body.codegen(output);
+        output.addNoArgInstruction(RETURN);
+    }
+
 
     public void writeToStdOut(PrettyPrinter p){
         p.printf("<JInitialisationBlockDeclaration line=\"%d\" " + "name=\"%s\">\n",
@@ -104,22 +110,6 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
         }
         p.indentLeft();
         p.println("</JInitialisationBlockDeclaration>");
-    }
-
-    public void codegen(CLEmitter output) {
-        output.addMethod(mods, "<init>", descriptor, null, false);
-
-
-        // Field initializations
-        // This should initialise the fields
-        // Not sure if needed tho
-        for (JFieldDeclaration field : definingClass
-                .instanceFieldInitializations()) {
-            field.codegenInitializations(output);
-        }
-        // And then the body
-        body.codegen(output);
-        output.addNoArgInstruction(RETURN);
     }
 
 }
