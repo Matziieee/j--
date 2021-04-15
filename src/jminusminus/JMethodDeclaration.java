@@ -3,6 +3,7 @@
 package jminusminus;
 
 import java.util.ArrayList;
+
 import static jminusminus.CLConstants.*;
 
 /**
@@ -40,6 +41,8 @@ class JMethodDeclaration extends JAST implements JMember {
 
     /** Is this method private? */
     protected boolean isPrivate;
+
+    public boolean isInInterface = false;
 
     /**
      * Constructs an AST node for a method declaration given the
@@ -100,7 +103,7 @@ class JMethodDeclaration extends JAST implements JMember {
         if (isAbstract && body != null) {
             JAST.compilationUnit.reportSemanticError(line(),
                 "abstract method cannot have a body");
-        } else if (body == null && !isAbstract) {
+        } else if (body == null && !isAbstract && !isInInterface){
             JAST.compilationUnit.reportSemanticError(line(),
                 "Method with null body must be abstract");
         } else if (isAbstract && isPrivate) {

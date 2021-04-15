@@ -1,26 +1,30 @@
 package jminusminus;
 
-public class JConditionalIfExpression extends JExpression{
+public class JConditionalExpressionCondition extends JExpression{
 
         /** Test expression. */
     private JExpression condition;
 
         /** Then clause. */
-    private JStatement expr;
+    private JExpression expr;
 
-    public JConditionalIfExpression(int line, JExpression condition, JExpression expr) {
+    public JConditionalExpressionCondition(int line, JExpression condition, JExpression expr) {
         super(line);
         this.condition = condition;
         this.expr = expr;
     }
 
     public JExpression analyze(Context context){
-        type = Type.INT;
+
+        condition = condition.analyze(context);
+        condition.type().mustMatchExpected(line(), Type.BOOLEAN);
+        expr.analyze(context);
+        type = expr.type();
         return this;
     }
 
     public void writeToStdOut(jminusminus.PrettyPrinter p){
-        p.printf("<JConditionalIfExpression>\n");
+        p.printf("<JConditionalExpression>\n");
         p.indentRight();
         p.printf("<Condition>\n");
         p.indentRight();
@@ -29,7 +33,7 @@ public class JConditionalIfExpression extends JExpression{
         p.printf("</Condition>\n");
         expr.writeToStdOut(p);
         p.indentLeft();
-        p.printf("</JConditionalIfExpression>\n");
+        p.printf("</JConditionalExpression>\n");
     };
 
     public void codegen(CLEmitter emitter){

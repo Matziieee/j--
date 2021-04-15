@@ -1,6 +1,9 @@
 package jminusminus;
 
 import java.util.ArrayList;
+
+import com.sun.jdi.Method;
+
 import static jminusminus.CLConstants.*;
 
 class JInterfaceDeclaration extends JAST implements JTypeDecl{
@@ -83,6 +86,53 @@ class JInterfaceDeclaration extends JAST implements JTypeDecl{
      *            the parent (compilation unit) context.
      */
     public void preAnalyze(Context context) {
+        this.context = new ClassContext(this,context);
+
+        superType = superType.resolve(this.context);
+
+        thisType.checkAccess(line,superType);
+        if (superType.isFinal()) {
+            JAST.compilationUnit.reportSemanticError(line,
+                    "Cannot extend a final type: %s", superType.toString());
+        }
+
+         // Create the (partial) class
+         CLEmitter partial = new CLEmitter(false);
+
+         // Add the class header to the partial class
+         String qualifiedName = JAST.compilationUnit.packageName() == "" ? name
+                 : JAST.compilationUnit.packageName() + "/" + name;
+         partial.addClass(mods, qualifiedName, superType.jvmName(), null, false);
+ 
+         // Pre-analyze the members and add them to the partial
+         // class
+         for (JMember member : interfaceBlock) {
+             //Begin hack
+             if(member instanceof JMethodDeclaration){
+                JMethodDeclaration method = (JMethodDeclaration) member;
+                method.isInInterface = true;
+             }
+             //End hack
+             member.preAnalyze(this.context, partial);
+             if (member instanceof JConstructorDeclaration
+                     && ((JConstructorDeclaration) member).params.size() == 0) {
+                    JAST.compilationUnit.reportSemanticError(line,
+                        "Interfaces can't have constructors", superType.toString());
+             }
+         }
+ 
+         // Add the implicit empty constructor?
+         if (!hasExplicitConstructor) {
+             //codegenPartialImplicitConstructor(partial);
+         }
+ 
+         // Get the Class rep for the (partial) class and make it
+         // the
+         // representation for this type
+         Type id = this.context.lookupType(name);
+         if (id != null && !JAST.compilationUnit.errorHasOccurred()) {
+             id.setClassRep(partial.toClass());
+         }
     }
 
     /**
@@ -96,6 +146,25 @@ class JInterfaceDeclaration extends JAST implements JTypeDecl{
      */
 
     public JAST analyze(Context context) {
+        //analyze all members
+        for (JMember member : interfaceBlock) {
+            ((JAST) member).analyze(this.context);
+        }
+        //Ensure that there are only methods
+        for (JMember member : interfaceBlock) {
+            if (member instanceof JFieldDeclaration) {
+                JAST.compilationUnit.reportSemanticError(line,
+                "Interfaces can't have fields", superType.toString());
+            }
+            if(member instanceof JMethodDeclaration){
+                JMethodDeclaration method = (JMethodDeclaration) member;
+                if(method.body != null){
+                    JAST.compilationUnit.reportSemanticError(line,
+                    "Methods in interfaces cant have bodies", superType.toString());
+                }
+            }
+
+        }
         return this;
     }
 
