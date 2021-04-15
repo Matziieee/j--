@@ -19,7 +19,8 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
     public JInitialisationBlocksDeclaration(int line, ArrayList<String> mods, JBlock body)
     {
         // TODO: make sure that everything is in order here
-        super(line, mods, "Initialisation block", Type.VOID, new ArrayList<JFormalParameter>(), body);
+        // super(line, mods, "Initialisation block" + Integer.toString(line), Type.VOID, new ArrayList<JFormalParameter>(), body); 
+        super(line, mods, "Initialisation block" + Integer.toString(line), Type.VOID, new ArrayList<JFormalParameter>(), body); 
     }
     
     public void preAnalyze(Context context, CLEmitter partial) {
@@ -30,7 +31,7 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
         }
         // Generate the method with an empty body (for now)
         // NOTE: from method, not constructor, might be wrong
-        partialCodegen(context, partial);
+        // partialCodegen(context, partial);
     }
 
     public JAST analyze(Context context) {
@@ -67,10 +68,6 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
         // make the class verifier happy.
         partial.addMethod(mods, name, descriptor, null, false);
 
-        partial.addNoArgInstruction(ALOAD_0);
-        partial.addMemberAccessInstruction(INVOKESPECIAL,
-                ((JTypeDecl) context.classContext().definition())
-                        .superType().jvmName(), "<init>", "()V");
 
         // Add implicit RETURN
         partial.addNoArgInstruction(RETURN);

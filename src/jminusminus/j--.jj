@@ -142,7 +142,10 @@ SKIP: {" "|"\t"|"\n"|"\r"|"\f"}
 SKIP: {<SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>}
 
 // Multiline line comment -- ignored
-SKIP: {<MULTI_LINE_COMMENT: "/*" (~["*/"])*  "*/">}
+// TODO: FIX
+// Matches only even number of chars inside
+SKIP: {<MULTI_LINE_COMMENT: "/*" ((~["\n","\r"])* ("\n"|"\r"|"\r\n")*)*  "*/">}
+
 
 
 // Reserved words
@@ -477,6 +480,8 @@ private ArrayList<JMember> classBody(): {
     ArrayList<String> mods = null;
     JMember aMember        = null;
     ArrayList<JMember> members = new ArrayList<JMember>();
+    JBlock body = null;
+    int line = 0;
 }
 {
     try {
@@ -484,19 +489,22 @@ private ArrayList<JMember> classBody(): {
         <LCURLY>
         (
             mods = modifiers()
-            aMember = memberDecl(mods) { members.add(aMember); }
-        )* |
-        (
-            LOOKAHEAD([<STATIC>] <LCURLY> (<IDENTIFIER> <ASSIGN> expression())* <RCURLY>)
+            aMember = memberDecl(mods) 
+            { 
+                    members.add(aMember); 
+            } |
+            LOOKAHEAD(<LCURLY>)
+            <LCURLY>
             {
-                mods = modifiers()
-                body = block()
-                aMember = new JInitialisationBlocksDeclaration(line, mods, body) { members.add(aMember); }
-                
-
+                    line = token.beginLine;
+                    body = block();
+                    aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
+                    members.add(aMember);
+                    
+    
             }
-
         )*
+        
         <RCURLY>
     }
     catch (ParseException e) {
@@ -1368,7 +1376,7 @@ private JExpression unaryExpression(): {
     try {
         <DEC> {line = token.beginLine; }
         unaryExpr = unaryExpression()
-        { expr = new JPreDecrementOp(line, unaryExpr; ) } |
+        { expr = new JPreDecrementOp(line, unaryExpr); } |
 
         <INC> { line = token.beginLine; }
         unaryExpr = unaryExpression()

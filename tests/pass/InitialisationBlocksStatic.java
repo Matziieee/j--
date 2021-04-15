@@ -9,6 +9,7 @@ public class InitialisationBlocksStatic {
     int otherInteger;
 
 
+    
     static {
         x = 10;
 
