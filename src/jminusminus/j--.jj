@@ -183,6 +183,31 @@ TOKEN: {
 | <MINUS: "-">
 | <PLUS_ASSIGN: "+=">
 | <STAR: "*">
+| <QUESTION:"?">
+| <UCOMP:"~">
+| <NEQ:"!=">
+| <DIV:"/">
+| <DIV_ASSIGN:"/=">
+| <MINUS_ASSIGN:"-=">
+| <STAR_ASSIGN:"*=">
+| <REM:"%">
+| <REM_ASSIGN:"%=">
+| <DRSHFT:">>">
+| <DRSHFT_ASSIGN:">>=">
+| <TRSHFT:">>>">
+| <TRSHFT_ASSIGN:">>>=">
+| <GTEQ:">=">
+| <DLSHFT:"<<">
+| <DLSHFT_ASSIGN:"<<=">
+| <LT:"<">
+| <HAT:"^">
+| <HAT_ASSIGN:"^=">
+| <BOT:"|">
+| <BOT_ASSIGN:"|=">
+| <LOR:"||">
+| <BAND:"&">
+| <BAND_ASSIGN:"&=">
+| <COLON:":">
 }
 
 // Separators (these could be combined with the reserved words)
@@ -196,6 +221,7 @@ TOKEN: {
 | <SEMI: ";">
 | <COMMA: ",">
 | <DOT: ".">
+
 }
 
 // Identifiers
@@ -1136,7 +1162,7 @@ private JExpression assignmentExpression(): {
 }
 {
     try {
-        lhs = conditionalAndExpression() { line = lhs.line(); }
+        lhs = ternaryExpression() { line = lhs.line(); }
         [
             <ASSIGN>
             rhs = assignmentExpression()
@@ -1153,6 +1179,61 @@ private JExpression assignmentExpression(): {
     { return lhs; }
 }
 
+private JExpression ternaryExpression():{
+    int line = 0;
+    JExpression lhs = null, rhs = null;
+}
+{
+    try {
+        lhs = conditionalOrExpression() { line = lhs.line(); }
+             
+            <QUESTION> 
+            rhs = ternaryElseExpression()
+            { lhs = new JConditionalExpressionCondition(line, lhs, rhs); }
+           
+    }
+    catch (ParseException e) {
+        recoverFromError(new int[] { SEMI, EOF }, e);
+    }
+    { return lhs; }
+}
+
+private JExpression ternaryElseExpression():{
+    int line = 0;
+    JExpression lhs = null, rhs = null;
+}
+{
+    try {
+        lhs = conditionalOrExpression() { line = lhs.line(); }
+             
+            <COLON>
+            rhs = conditionalOrExpression()
+            { lhs = new JConditionalExpressionExpression(line, lhs, rhs); }
+    }
+    catch (ParseException e) {
+        recoverFromError(new int[] { SEMI, EOF }, e);
+    }
+    { return lhs; }
+}
+
+private JExpression conditionalOrExpression():{
+   int line = 0;
+    JExpression lhs = null, rhs = null;
+}
+{
+    try {
+        lhs = conditionalAndExpression() { line = lhs.line(); }
+        (
+            <LOR>
+            rhs = conditionalAndExpression()
+            { lhs = new JLogicalOrOp(line, lhs, rhs); }
+        )*
+    }
+    catch (ParseException e) {
+        recoverFromError(new int[] { SEMI, EOF }, e);
+    }
+    { return lhs; }
+}
 /**
  * Parse a conditional-and expression.
  * 
