@@ -35,6 +35,7 @@ public class JMinusMinusTestRunner {
         suite.addTestSuite(PrePostOperationsTest.class);
         suite.addTestSuite(AssignmentOperationTest.class);
         suite.addTestSuite(LogicalOrTest.class);
+        suite.addTestSuite(InterfaceTest.class);
         return suite;
     }
 
