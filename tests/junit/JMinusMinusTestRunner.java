@@ -36,6 +36,7 @@ public class JMinusMinusTestRunner {
         suite.addTestSuite(AssignmentOperationTest.class);
         suite.addTestSuite(LogicalOrTest.class);
         suite.addTestSuite(InterfaceTest.class);
+        suite.addTestSuite(ConditionalExpressionTest.class);
         return suite;
     }
 
