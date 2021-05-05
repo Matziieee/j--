@@ -489,20 +489,18 @@ private ArrayList<JMember> classBody(): {
         <LCURLY>
         (
             mods = modifiers()
+            LOOKAHEAD(<LCURLY)
+            (
+                line = token.beginLine;
+                body = block();
+                aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
+                members.add(aMember);
+            ) |
             aMember = memberDecl(mods) 
             { 
                     members.add(aMember); 
-            } |
-            LOOKAHEAD(<LCURLY>)
-            <LCURLY>
-            {
-                    line = token.beginLine;
-                    body = block();
-                    aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
-                    members.add(aMember);
-                    
-    
-            }
+            } 
+
         )*
         
         <RCURLY>
@@ -1099,6 +1097,8 @@ private JStatement statementExpression(): {
             line = expr.line();
             if (expr instanceof JAssignment
              || expr instanceof JPreIncrementOp
+             || expr instanceof JPostIncrementOp
+             || expr instanceof JPreDecrementOp
              || expr instanceof JPostDecrementOp
              || expr instanceof JMessageExpression
              || expr instanceof JSuperConstruction

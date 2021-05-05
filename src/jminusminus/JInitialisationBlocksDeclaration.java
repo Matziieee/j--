@@ -74,7 +74,7 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
     }
 
     public void codegen(CLEmitter output) {
-        output.addMethod(mods, "<init>", descriptor, null, false);
+        // output.addMethod(mods, "<init>", descriptor, null, false);
 
         // And then the body
         body.codegen(output);
