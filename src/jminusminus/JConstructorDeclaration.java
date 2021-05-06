@@ -57,12 +57,12 @@ class JConstructorDeclaration extends JMethodDeclaration implements JMember {
 
     public void preAnalyze(Context context, CLEmitter partial) {
         super.preAnalyze(context, partial);
-        if (isStatic) {
+        if (isPrivate) {
             JAST.compilationUnit.reportSemanticError(line(),
-                    "Constructor cannot be declared static");
+                    "Block initialisation cannot be declared private");
         } else if (isAbstract) {
             JAST.compilationUnit.reportSemanticError(line(),
-                    "Constructor cannot be declared abstract");
+                    "Block initialisation cannot be declared abstract");
         }
         if (body.statements().size() > 0
                 && body.statements().get(0) instanceof JStatementExpression) {
@@ -107,6 +107,11 @@ class JConstructorDeclaration extends JMethodDeclaration implements JMember {
                                              this.context.nextOffset());
             defn.initialize();
             this.context.addEntry(param.line(), param.name(), defn);
+        }
+        if(definingClass.initialisationBlocksDeclarations() != null){
+            for(JInitialisationBlocksDeclaration initBlock : definingClass.initialisationBlocksDeclarations()){
+                initBlock.body.analyze(context);
+            }
         }
         if (body != null) {
             body = body.analyze(this.context);
@@ -157,8 +162,18 @@ class JConstructorDeclaration extends JMethodDeclaration implements JMember {
                 .instanceFieldInitializations()) {
             field.codegenInitializations(output);
         }
+
+        // TODO: insert initialisation block
+        for(JInitialisationBlocksDeclaration initBlock :
+         definingClass.initialisationBlocksDeclarations()){
+            initBlock.body.codegen(output);
+        }
+
+
+
         // And then the body
         body.codegen(output);
+
         output.addNoArgInstruction(RETURN);
     }
 

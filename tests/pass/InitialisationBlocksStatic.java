@@ -5,10 +5,15 @@ import java.lang.System;
 public class InitialisationBlocksStatic {
 
 
-    static int x;
+    public static int x;
+    int someInteger;
     int otherInteger;
 
+    public InitialisationBlocksStatic(int number){
+        someInteger = number;
+    }
 
+    
     static {
         x = 10;
 

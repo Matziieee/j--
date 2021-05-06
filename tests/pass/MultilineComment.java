@@ -5,17 +5,22 @@ import java.lang.System;
 public class MultilineComment {
     public boolean pass(){
         /*
-        //return false;
+        mmumbl 
+        return false;
+        
         */
+
+
         return true;
     }
 
 
     public static void main(String[] args){
-        /*
 
+        /*
+        // Error if not commented
         System.out.println("Multiline comments does not work!");
-        //Totally wrong statement that would give you syntax error if not commented out
+        Totally wrong statement that would give you syntax error if not commented out
 
         */
 

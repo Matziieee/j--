@@ -1100,11 +1100,11 @@ public class Parser {
         } else if (have(PLUS_ASSIGN)) {
             return new JPlusAssignOp(line, lhs, assignmentExpression());
         } else if (have(STAR_ASSIGN)) {
-            return new JPlusAssignOp(line, lhs, assignmentExpression());
+            return new JStarAssignOp(line, lhs, assignmentExpression());
         } else if (have(MINUS_ASSIGN)) {
-            return new JPlusAssignOp(line, lhs, assignmentExpression());
+            return new JMinusAssignOp(line, lhs, assignmentExpression());
         } else if (have(DIV_ASSIGN)) {
-            return new JPlusAssignOp(line, lhs, assignmentExpression());
+            return new JDivAssignOp(line, lhs, assignmentExpression());
         } else {
             return lhs;
         }

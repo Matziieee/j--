@@ -35,8 +35,13 @@ public class JMinusMinusTestRunner {
         suite.addTestSuite(PrePostOperationsTest.class);
         suite.addTestSuite(AssignmentOperationTest.class);
         suite.addTestSuite(LogicalOrTest.class);
+<<<<<<< HEAD
         suite.addTestSuite(InterfaceTest.class);
         suite.addTestSuite(ConditionalExpressionTest.class);
+=======
+        suite.addTestSuite(InitialisationBlockTest.class);
+        suite.addTestSuite(InitialisationBlocksStaticTest.class);
+>>>>>>> maciek
         return suite;
     }
 
