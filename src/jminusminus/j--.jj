@@ -491,10 +491,14 @@ private ArrayList<JMember> classBody(): {
             mods = modifiers()
             LOOKAHEAD(<LCURLY)
             (
-                line = token.beginLine;
                 body = block();
-                aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
-                members.add(aMember);
+                {
+                    line = token.beginLine;
+
+                    aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
+                    members.add(aMember);
+                }
+
             ) |
             aMember = memberDecl(mods) 
             { 
