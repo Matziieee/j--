@@ -36,6 +36,7 @@ public class JMinusMinusTestRunner {
         suite.addTestSuite(AssignmentOperationTest.class);
         suite.addTestSuite(LogicalOrTest.class);
         suite.addTestSuite(InitialisationBlockTest.class);
+        suite.addTestSuite(InitialisationBlocksStaticTest.class);
         return suite;
     }
 

@@ -144,9 +144,8 @@ SKIP: {<SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>}
 // Multiline line comment -- ignored
 // TODO: FIX
 // Matches only even number of chars inside
-SKIP: {<MULTI_LINE_COMMENT: "/*" ((~["\n","\r"])* ("\n"|"\r"|"\r\n")*)*  "*/">}
-
-
+// SKIP: {<MULTI_LINE_COMMENT: "/*" ((~["\n","\r"])* ("\n"|"\r"|"\r\n")*)*  "*/">}
+SKIP: {<MULTI_LINE_COMMENT: "/*" (~["*"])* "*" (~["*","/"] (~["*"])* "*" | "*")* "/">}
 
 // Reserved words
 TOKEN: {
@@ -488,10 +487,10 @@ private ArrayList<JMember> classBody(): {
         // TODO: STATIC and NON STATIC BRACET INITIALIZATION
         <LCURLY>
         (
-            mods = modifiers()
-            LOOKAHEAD(<LCURLY)
+            LOOKAHEAD(<STATIC> <LCURLY>)
             (
-                body = block();
+                mods = modifiers()
+                body = block()
                 {
                     line = token.beginLine;
 
@@ -500,6 +499,18 @@ private ArrayList<JMember> classBody(): {
                 }
 
             ) |
+            LOOKAHEAD(<LCURLY>)
+            (
+                body = block()
+                {
+                    line = token.beginLine;
+
+                    aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
+                    members.add(aMember);
+                }
+
+            ) |
+            mods = modifiers()
             aMember = memberDecl(mods) 
             { 
                     members.add(aMember); 
