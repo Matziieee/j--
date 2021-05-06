@@ -198,9 +198,6 @@ TOKEN: {
 | <UCOMP:"~">
 | <NEQ:"!=">
 | <DIV:"/">
-| <DIV_ASSIGN:"/=">
-| <MINUS_ASSIGN:"-=">
-| <STAR_ASSIGN:"*=">
 | <REM:"%">
 | <REM_ASSIGN:"%=">
 | <DRSHFT:">>">
