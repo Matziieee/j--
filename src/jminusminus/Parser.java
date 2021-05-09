@@ -603,7 +603,7 @@ public class Parser {
     private JMember blockContructorsDecl(ArrayList<String> mods){
         int line = scanner.token().line();
         JBlock body = block();
-        JMember memberDecl = new JInitialisationBlocksDeclaration(line, mods, body);
+        JMember memberDecl = new JInitializationBlocksDeclaration(line, mods, body);
         return memberDecl; 
     }
 

@@ -109,8 +109,10 @@ class JConstructorDeclaration extends JMethodDeclaration implements JMember {
             this.context.addEntry(param.line(), param.name(), defn);
         }
         if(definingClass.initialisationBlocksDeclarations() != null){
-            for(JInitialisationBlocksDeclaration initBlock : definingClass.initialisationBlocksDeclarations()){
-                initBlock.body.analyze(context);
+            for(JInitializationBlocksDeclaration initBlock : definingClass.initialisationBlocksDeclarations()){
+                if(initBlock.body != null){
+                    initBlock.body.analyze(this.context);
+                }
             }
         }
         if (body != null) {
@@ -162,9 +164,7 @@ class JConstructorDeclaration extends JMethodDeclaration implements JMember {
                 .instanceFieldInitializations()) {
             field.codegenInitializations(output);
         }
-
-        // TODO: insert initialisation block
-        for(JInitialisationBlocksDeclaration initBlock :
+        for(JInitializationBlocksDeclaration initBlock :
          definingClass.initialisationBlocksDeclarations()){
             initBlock.body.codegen(output);
         }

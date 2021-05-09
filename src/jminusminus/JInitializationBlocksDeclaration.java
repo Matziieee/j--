@@ -5,33 +5,43 @@ import static jminusminus.CLConstants.*;
 
 
 /**
- * Empty Class that should be used for creation of initialisation blocks
+ * Empty Class that should be used for creation of Initialization blocks
  * @param line
  * @param mods
  * @param body
     */  
 
-public class JInitialisationBlocksDeclaration extends JMethodDeclaration implements JMember {
+public class JInitializationBlocksDeclaration extends JMethodDeclaration implements JMember {
 
     /** Defining class */
     JClassDeclaration definingClass;
 
-    public JInitialisationBlocksDeclaration(int line, ArrayList<String> mods, JBlock body)
+    public JInitializationBlocksDeclaration(int line, ArrayList<String> mods, JBlock body)
     {
         // TODO: make sure that everything is in order here
-        // super(line, mods, "Initialisation block" + Integer.toString(line), Type.VOID, new ArrayList<JFormalParameter>(), body); 
-        super(line, mods, "Initialisation block" + Integer.toString(line), Type.VOID, new ArrayList<JFormalParameter>(), body); 
+        // super(line, mods, "Initialization block" + Integer.toString(line), Type.VOID, new ArrayList<JFormalParameter>(), body); 
+        super(line, mods, "Initialization block" + Integer.toString(line), Type.VOID, new ArrayList<JFormalParameter>(), body); 
     }
     
     public void preAnalyze(Context context, CLEmitter partial) {
         super.preAnalyze(context, partial);
         if (isAbstract) {
             JAST.compilationUnit.reportSemanticError(line(),
-                    "Initialisation block cannot be declared abstract");
+                    "Initialization block cannot be declared abstract");
         }
-        // Generate the method with an empty body (for now)
-        // NOTE: from method, not constructor, might be wrong
-        // partialCodegen(context, partial);
+        if (isPrivate) {
+            JAST.compilationUnit.reportSemanticError(line(),
+                    "Initialization block cannot be declared private");
+        }
+        if (mods.contains("public")) {
+            JAST.compilationUnit.reportSemanticError(line(),
+                    "Initialization block cannot be declared public");
+        }
+        if (mods.contains("protected")) {
+            JAST.compilationUnit.reportSemanticError(line(),
+                    "Initialization block cannot be declared protected");
+        }
+
     }
 
     public JAST analyze(Context context) {
@@ -46,17 +56,6 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
             // Offset 0 is used to address "this".
             this.context.nextOffset();
         }
-
-        // Probably here might be the place to init the variables
-
-        // // Declare the parameters. We consider a formal parameter 
-        // // to be always initialized, via a function call.
-        // for (JFormalParameter param : params) {
-        //     LocalVariableDefn defn = new LocalVariableDefn(param.type(), 
-        //         this.context.nextOffset());
-        //     defn.initialize();
-        //     this.context.addEntry(param.line(), param.name(), defn);
-        // }
         if (body != null) {
             body = body.analyze(this.context);
         }
@@ -74,7 +73,6 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
     }
 
     public void codegen(CLEmitter output) {
-        // output.addMethod(mods, "<init>", descriptor, null, false);
 
         // And then the body
         body.codegen(output);
@@ -83,7 +81,7 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
 
 
     public void writeToStdOut(PrettyPrinter p){
-        p.printf("<JInitialisationBlockDeclaration line=\"%d\" " + "name=\"%s\">\n",
+        p.printf("<JInitializationBlockDeclaration line=\"%d\" " + "name=\"%s\">\n",
                 line(), name);
         p.indentRight();
         if (context != null) {
@@ -106,7 +104,7 @@ public class JInitialisationBlocksDeclaration extends JMethodDeclaration impleme
             p.println("</Body>");
         }
         p.indentLeft();
-        p.println("</JInitialisationBlockDeclaration>");
+        p.println("</JInitializationBlockDeclaration>");
     }
 
 }
