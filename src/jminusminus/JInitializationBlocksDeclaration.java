@@ -63,20 +63,11 @@ public class JInitializationBlocksDeclaration extends JMethodDeclaration impleme
     }
 
     public void partialCodegen(Context context, CLEmitter partial) {
-        // Generate a method with an empty body; need a return to
-        // make the class verifier happy.
-        partial.addMethod(mods, name, descriptor, null, false);
 
-
-        // Add implicit RETURN
-        partial.addNoArgInstruction(RETURN);
     }
 
     public void codegen(CLEmitter output) {
 
-        // And then the body
-        body.codegen(output);
-        output.addNoArgInstruction(RETURN);
     }
 
 

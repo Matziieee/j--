@@ -18,6 +18,7 @@ public class InitialisationBlockTest extends TestCase {
 
     public void testInitBlocks() {
         this.assertEquals(initBlock.otherInteger, 10);
+        this.assertEquals(initBlock.x, 21);
         
     }
 }

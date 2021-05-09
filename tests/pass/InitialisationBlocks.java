@@ -5,7 +5,7 @@ import java.lang.System;
 public class InitialisationBlocks {
 
 
-    int x;
+    public int x;
     public int otherInteger;
 
     public InitialisationBlocks(int number){
