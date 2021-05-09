@@ -198,6 +198,7 @@ TOKEN: {
 | <UCOMP:"~">
 | <NEQ:"!=">
 | <DIV:"/">
+
 | <REM:"%">
 | <REM_ASSIGN:"%=">
 | <DRSHFT:">>">
@@ -1220,6 +1221,10 @@ private JExpression expression(): {
  *       conditionalAndExpression                // level 13
  *           [( ASSIGN       // must be valid lhs
  *            | PLUS_ASSIGN 
+ *            | MINUS_ASSIGN 
+ *            | STAR_ASSIGN 
+ *            | DIV_ASSIGN 
+ *            | REM_ASSIGN 
  *            )
  *            assignmentExpression]
  * </pre>
@@ -1253,7 +1258,11 @@ private JExpression assignmentExpression(): {
 
             <DIV_ASSIGN>
             rhs = assignmentExpression()
-            { lhs = new JDivAssignOp(line, lhs, rhs); } 
+            { lhs = new JDivAssignOp(line, lhs, rhs); }  |
+
+            <REM_ASSIGN>
+            rhs = assignmentExpression()
+            { lhs = new JRemAssignOp(line, lhs, rhs); } 
         ]
     }
     catch (ParseException e) {

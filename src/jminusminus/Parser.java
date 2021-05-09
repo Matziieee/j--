@@ -1085,6 +1085,7 @@ public class Parser {
      *            | STAR_ASSIGN // must be valid lhs
      *            | MINUS_ASSIGN // must be valid lhs
      *            | DIV_ASSIGN // must be valid lhs
+     *            | REM_ASSIGN // must be valid lhs
      *            )
      *            assignmentExpression]
      * </pre>
@@ -1105,6 +1106,8 @@ public class Parser {
             return new JMinusAssignOp(line, lhs, assignmentExpression());
         } else if (have(DIV_ASSIGN)) {
             return new JDivAssignOp(line, lhs, assignmentExpression());
+        } else if (have(REM_ASSIGN)) {
+            return new JRemAssignOp(line, lhs, assignmentExpression());
         } else {
             return lhs;
         }
