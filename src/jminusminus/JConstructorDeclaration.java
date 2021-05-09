@@ -57,12 +57,12 @@ class JConstructorDeclaration extends JMethodDeclaration implements JMember {
 
     public void preAnalyze(Context context, CLEmitter partial) {
         super.preAnalyze(context, partial);
-        if (isPrivate) {
+        if (isStatic) {
             JAST.compilationUnit.reportSemanticError(line(),
-                    "Block initialisation cannot be declared private");
+                    "Constructor cannot be declared static");
         } else if (isAbstract) {
             JAST.compilationUnit.reportSemanticError(line(),
-                    "Block initialisation cannot be declared abstract");
+                    "Constructor cannot be declared abstract");
         }
         if (body.statements().size() > 0
                 && body.statements().get(0) instanceof JStatementExpression) {
