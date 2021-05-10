@@ -523,13 +523,13 @@ public class Parser {
         mustBe(IDENTIFIER);
         String name = scanner.previousToken().image();
         Type superInterface;
-        if(have(IMPLEMENTS)){
+        if(have(EXTENDS)){
             superInterface = qualifiedIdentifier();
         }
         else {
             superInterface = Type.OBJECT;
         }
-        return new JInterfaceDeclaration(line,mods,name, superInterface, interfaceBody());
+        return new JInterfaceDeclaration(line,mods,name, superInterface, classBody());
     }
 
     /**
@@ -587,16 +587,15 @@ public class Parser {
                     params, null);
         } else {
             type = type();
-            if (seeIdentLParen()) {
-                // Non void method
-                mustBe(IDENTIFIER);
-                String name = scanner.previousToken().image();
-                ArrayList<JFormalParameter> params = formalParameters();
-                JBlock body = have(SEMI) ? null : block();
-                memberDecl = new JMethodDeclaration(line, mods, name, type,
-                        params, null);
-            }
+            mustBe(IDENTIFIER);
+            // Non void method
+            String name = scanner.previousToken().image();
+            ArrayList<JFormalParameter> params = formalParameters();
+            JBlock body = have(SEMI) ? null : block();
+            memberDecl = new JMethodDeclaration(line, mods, name, type,
+                    params, null);
         }
+        
         return memberDecl;
     }
 

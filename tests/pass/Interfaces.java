@@ -1,14 +1,13 @@
 package pass;
 
 public interface Interfaces {
-
-    public void mustIncludeThis();
+    public int mustIncludeThis();
 }
 
 
-class ImplementingClass implements Interfaces {
-
-    public void mustIncludeThis(){
-    
+public class ImplementingClass implements Interfaces {
+    public int mustIncludeThis(){
+        return 2;
     }
+    
 }

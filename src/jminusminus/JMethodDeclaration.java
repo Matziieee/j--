@@ -13,7 +13,7 @@ import static jminusminus.CLConstants.*;
 class JMethodDeclaration extends JAST implements JMember {
 
     /** Method modifiers. */
-    protected ArrayList<String> mods;
+    public ArrayList<String> mods;
 
     /** Method name. */
     protected String name;
@@ -25,7 +25,7 @@ class JMethodDeclaration extends JAST implements JMember {
     protected ArrayList<JFormalParameter> params;
 
     /** Method body. */
-    protected JBlock body;
+    public JBlock body;
 
     /** Built in analyze(). */
     protected MethodContext context;
@@ -34,13 +34,13 @@ class JMethodDeclaration extends JAST implements JMember {
     protected String descriptor;
 
     /** Is this method abstract? */
-    protected boolean isAbstract;
+    public boolean isAbstract;
 
     /** Is this method static? */
     protected boolean isStatic;
 
     /** Is this method private? */
-    protected boolean isPrivate;
+    public boolean isPrivate;
 
     public boolean isInInterface = false;
 

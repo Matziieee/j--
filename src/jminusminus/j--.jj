@@ -501,7 +501,7 @@ private JInterfaceDeclaration interfaceDeclaration(ArrayList<String> mods):{
         <INTERFACE> { line = token.beginLine; }
         <IDENTIFIER> { name = token.image; }
         [
-            <IMPLEMENTS> superClass = qualifiedIdentifier()
+            <EXTENDS> superClass = qualifiedIdentifier()
         ]
         classBody = classBody() 
         

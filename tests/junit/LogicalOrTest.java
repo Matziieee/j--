@@ -18,8 +18,9 @@ public class LogicalOrTest extends TestCase{
     }
 
     public void testOr() {
-        this.assertEquals(logicalOr.or(true, false),false);
-        this.assertEquals(logicalOr.or(false, false),false);
-        this.assertEquals(logicalOr.or(true, true),true);
+        this.assertEquals(true, logicalOr.or(false, true));
+        this.assertEquals(true, logicalOr.or(true, false));
+        this.assertEquals(false, logicalOr.or(false, false));
+        this.assertEquals(true,logicalOr.or(true, true));
     }
 }

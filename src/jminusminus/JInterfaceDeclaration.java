@@ -107,17 +107,32 @@ class JInterfaceDeclaration extends JAST implements JTypeDecl{
          // Pre-analyze the members and add them to the partial
          // class
          for (JMember member : interfaceBlock) {
-             //Begin hack
+
              if(member instanceof JMethodDeclaration){
                 JMethodDeclaration method = (JMethodDeclaration) member;
+                //hacky
                 method.isInInterface = true;
-             }
-             //End hack
-             member.preAnalyze(this.context, partial);
-             if (member instanceof JConstructorDeclaration
+                method.preAnalyze(this.context, partial);
+                if(method.body != null){
+                    JAST.compilationUnit.reportSemanticError(line,
+                    "Interface methods can't have bodies", superType.toString());
+                }
+                if(method.isPrivate){
+                    JAST.compilationUnit.reportSemanticError(line,
+                    "Interface methods must be public", superType.toString());
+                }
+                if(!method.mods.contains("abstract")){
+                    method.mods.add("abstract");
+                    method.isAbstract = true;
+                }
+
+             }else if (member instanceof JConstructorDeclaration
                      && ((JConstructorDeclaration) member).params.size() == 0) {
                     JAST.compilationUnit.reportSemanticError(line,
                         "Interfaces can't have constructors", superType.toString());
+             }else{
+                JAST.compilationUnit.reportSemanticError(line,
+                "Interfaces can only have methods", superType.toString());
              }
          }
  
@@ -180,6 +195,19 @@ class JInterfaceDeclaration extends JAST implements JTypeDecl{
         String qualifiedName = JAST.compilationUnit.packageName() == "" ? name
         : JAST.compilationUnit.packageName() + "/" + name;
         output.addClass(mods, qualifiedName, superType.jvmName(), null, false);
+        ArrayList<String> mods = new ArrayList<String>();
+        mods.add("public");
+        output.addMethod(mods, "<init>", "()V", null, false);
+        output.addNoArgInstruction(ALOAD_0);
+        output.addMemberAccessInstruction(INVOKESPECIAL, superType.jvmName(),
+                "<init>", "()V");
+
+        // Return
+        output.addNoArgInstruction(RETURN);
+
+        for (JMember member : interfaceBlock) {
+            ((JAST) member).codegen(output);
+        }
     }
 
     /**

@@ -4,6 +4,8 @@ package jminusminus;
 
 import static jminusminus.CLConstants.*;
 
+import javax.management.openmbean.SimpleType;
+
 /**
  * This abstract base class is the AST node for binary expressions that return
  * booleans.
@@ -196,7 +198,7 @@ class JLogicalAndOp extends JBooleanBinaryExpression {
 class JLogicalOrOp extends JBooleanBinaryExpression {
 
     /**
-     * Constructs an AST node for a logical AND expression given its line number,
+     * Constructs an AST node for a logical OR expression given its line number,
      * and lhs and rhs operands.
      * 
      * @param line
@@ -213,7 +215,7 @@ class JLogicalOrOp extends JBooleanBinaryExpression {
     }
 
     /**
-     * Analyzing a logical AND expression involves analyzing its operands and
+     * Analyzing a logical OR expression involves analyzing its operands and
      * insuring they are boolean; the result type is of course boolean.
      * 
      * @param context
@@ -232,7 +234,7 @@ class JLogicalOrOp extends JBooleanBinaryExpression {
 
     /**
      * The semantics of j-- require that we implement short-circuiting branching
-     * in implementing the logical AND.
+     * in implementing the logical OR.
      * 
      * @param output
      *            the code emitter (basically an abstraction for producing the
@@ -243,16 +245,11 @@ class JLogicalOrOp extends JBooleanBinaryExpression {
      *            should we branch on true?
      */
 
-    public void codegen(CLEmitter output, String targetLabel, boolean onTrue) {  
-        if (onTrue) {
-            String falseLabel = output.createLabel();
-            lhs.codegen(output, falseLabel, false);
-            rhs.codegen(output, targetLabel, true);
-            output.addLabel(falseLabel);
-        } else {
-            lhs.codegen(output, targetLabel, false);
-            rhs.codegen(output, targetLabel, false);
-        }
+    public void codegen(CLEmitter output, String targetLabel, boolean onTrue) {
+        String lhTrueLabel = output.createLabel();
+        lhs.codegen(output, lhTrueLabel, true);
+        rhs.codegen(output, targetLabel, false);
+        output.addLabel(lhTrueLabel);
     }
 
 }
