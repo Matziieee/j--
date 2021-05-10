@@ -1,4 +1,5 @@
 package jminusminus;
+import static jminusminus.CLConstants.*;
 
 public class JConditionalExpressionCondition extends JExpression{
 
@@ -37,6 +38,14 @@ public class JConditionalExpressionCondition extends JExpression{
     };
 
     public void codegen(CLEmitter emitter){
-
+        JConditionalExpressionExpression expression = (JConditionalExpressionExpression) expr;
+        String endLabel = emitter.createLabel();
+        String elseLabel = emitter.createLabel();
+        condition.codegen(emitter, elseLabel, false);
+        expression.codegenThen(emitter);
+        emitter.addBranchInstruction(GOTO, endLabel);
+        emitter.addLabel(elseLabel);
+        expression.codegenElse(emitter);
+        emitter.addLabel(endLabel);
     }
 }

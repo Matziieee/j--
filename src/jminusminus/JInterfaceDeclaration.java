@@ -195,6 +195,7 @@ class JInterfaceDeclaration extends JAST implements JTypeDecl{
         String qualifiedName = JAST.compilationUnit.packageName() == "" ? name
         : JAST.compilationUnit.packageName() + "/" + name;
         output.addClass(mods, qualifiedName, superType.jvmName(), null, false);
+
         ArrayList<String> mods = new ArrayList<String>();
         mods.add("public");
         output.addMethod(mods, "<init>", "()V", null, false);

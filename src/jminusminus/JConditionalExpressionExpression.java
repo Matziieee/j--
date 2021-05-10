@@ -41,4 +41,13 @@ public void writeToStdOut(jminusminus.PrettyPrinter p){
 public void codegen(CLEmitter emitter){
 
 }
+
+public void codegenThen(CLEmitter emitter){
+    lhs.codegen(emitter);
+}
+
+public void codegenElse(CLEmitter emitter){
+    rhs.codegen(emitter);
+}
+
 }
