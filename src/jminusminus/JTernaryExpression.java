@@ -15,11 +15,12 @@ public class JTernaryExpression extends JExpression {
     }
 
     public JExpression analyze(Context context){
-        /*
         condition = condition.analyze(context);
         condition.type().mustMatchExpected(line(), Type.BOOLEAN);
-        expr.analyze(context);
-        type = expr.type();*/
+        expr1.analyze(context);
+        expr2.analyze(context);
+        expr1.type().mustMatchExpected(line(), expr2.type());
+        type = expr1.type();
         return this;
     }
 
@@ -42,14 +43,13 @@ public class JTernaryExpression extends JExpression {
     };
 
     public void codegen(CLEmitter emitter){
-        /*JConditionalExpressionExpression expression = (JConditionalExpressionExpression) expr;
         String endLabel = emitter.createLabel();
         String elseLabel = emitter.createLabel();
         condition.codegen(emitter, elseLabel, false);
-        expression.codegenThen(emitter);
+        expr1.codegen(emitter);
         emitter.addBranchInstruction(GOTO, endLabel);
         emitter.addLabel(elseLabel);
-        expression.codegenElse(emitter);
-        emitter.addLabel(endLabel);*/
+        expr2.codegen(emitter);
+        emitter.addLabel(endLabel);
     }
 }
