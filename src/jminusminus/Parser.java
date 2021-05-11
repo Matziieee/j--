@@ -1156,36 +1156,6 @@ public class Parser {
         return lhs;
     }
 
-    private JExpression bitwiseOrExpression(){
-        int line = scanner.token().line();
-        boolean more = true;
-        JExpression lhs = equalityExpression();
-        while(more){
-            if(have(BTAND)) {
-                lhs = new JBitwiseOrOp(line,lhs,equalityExpression());
-            }
-            else{
-                more = false;
-            }
-        }
-        return lhs;
-    }
-
-    private JExpression bitwiseExclusiveOrExpression(){
-        int line = scanner.token().line();
-        boolean more = true;
-        JExpression lhs = equalityExpression();
-        while(more){
-            if(have(BTAND)) {
-                lhs = new JBitwiseExclusiveOrOp(line,lhs,equalityExpression());
-            }
-            else{
-                more = false;
-            }
-        }
-        return lhs;
-    }
-
     /**
      * Parse an equality expression.
      * 
