@@ -1239,7 +1239,7 @@ private JExpression assignmentExpression(): {
 }
 {
     try {
-        // lhs = ternaryExpression() { line = lhs.line(); }
+        lhs = ternaryExpression() { line = lhs.line(); }
         [
             <ASSIGN>
             rhs = assignmentExpression()
@@ -1280,12 +1280,12 @@ private JExpression ternaryExpression():{
     try {
         lhs = conditionalOrExpression() { line = lhs.line(); }    
         (
-        <QUESTION>
-        expr1 = additiveExpression()
-        <COLON>
-        expr2 = additiveExpression()
-        {lhs = new JTernaryExpression(line, lhs, expr1, expr2); }
-        )
+            <QUESTION>
+            expr1 = conditionalOrExpression()
+            <COLON>
+            expr2 = conditionalOrExpression()
+            { lhs = new JTernaryExpression(line, lhs, expr1, expr2); }
+        )*
     }
     catch (ParseException e) {
         recoverFromError(new int[] { SEMI, EOF }, e);
@@ -1471,11 +1471,6 @@ private JExpression multiplicativeExpression(): {
             <STAR>
             rhs = unaryExpression()
             { lhs = new JMultiplyOp(line, lhs, rhs); }
-        )* |
-        (
-            <DIV>
-            rhs = unaryExpression()
-            { lhs = new (line, lhs, rhs); }
         )*
     }
     catch (ParseException e) {
