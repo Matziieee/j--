@@ -602,7 +602,7 @@ public class Parser {
     private JMember blockContructorsDecl(ArrayList<String> mods){
         int line = scanner.token().line();
         JBlock body = block();
-        JMember memberDecl = new JInitialisationBlocksDeclaration(line, mods, body);
+        JMember memberDecl = new JInitializationBlocksDeclaration(line, mods, body);
         return memberDecl; 
     }
 
@@ -1084,6 +1084,7 @@ public class Parser {
      *            | STAR_ASSIGN // must be valid lhs
      *            | MINUS_ASSIGN // must be valid lhs
      *            | DIV_ASSIGN // must be valid lhs
+     *            | REM_ASSIGN // must be valid lhs
      *            )
      *            assignmentExpression]
      * </pre>
@@ -1099,11 +1100,13 @@ public class Parser {
         } else if (have(PLUS_ASSIGN)) {
             return new JPlusAssignOp(line, lhs, assignmentExpression());
         } else if (have(STAR_ASSIGN)) {
-            return new JPlusAssignOp(line, lhs, assignmentExpression());
+            return new JStarAssignOp(line, lhs, assignmentExpression());
         } else if (have(MINUS_ASSIGN)) {
-            return new JPlusAssignOp(line, lhs, assignmentExpression());
+            return new JMinusAssignOp(line, lhs, assignmentExpression());
         } else if (have(DIV_ASSIGN)) {
-            return new JPlusAssignOp(line, lhs, assignmentExpression());
+            return new JDivAssignOp(line, lhs, assignmentExpression());
+        } else if (have(REM_ASSIGN)) {
+            return new JRemAssignOp(line, lhs, assignmentExpression());
         } else {
             return lhs;
         }

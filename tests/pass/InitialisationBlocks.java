@@ -5,8 +5,12 @@ import java.lang.System;
 public class InitialisationBlocks {
 
 
-    int x;
-    int otherInteger;
+    public int x;
+    public int otherInteger;
+
+    public InitialisationBlocks(int number){
+        x = number;
+    }
 
 
     {

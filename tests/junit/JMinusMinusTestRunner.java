@@ -37,6 +37,8 @@ public class JMinusMinusTestRunner {
         suite.addTestSuite(LogicalOrTest.class);
         suite.addTestSuite(InterfaceTest.class);
         suite.addTestSuite(ConditionalExpressionTest.class);
+        suite.addTestSuite(InitialisationBlockTest.class);
+        suite.addTestSuite(InitialisationBlocksStaticTest.class);
         return suite;
     }
 

@@ -40,6 +40,8 @@ class JClassDeclaration extends JAST implements JTypeDecl {
     /** Instance fields of this class. */
     private ArrayList<JFieldDeclaration> instanceFieldInitializations;
 
+    private ArrayList<JInitializationBlocksDeclaration> initializationBlocksDeclarations;
+
     /** Static (class) fields of this class. */
     private ArrayList<JFieldDeclaration> staticFieldInitializations;
 
@@ -69,6 +71,7 @@ class JClassDeclaration extends JAST implements JTypeDecl {
         this.classBlock = classBlock;
         hasExplicitConstructor = false;
         instanceFieldInitializations = new ArrayList<JFieldDeclaration>();
+        initializationBlocksDeclarations = new ArrayList<JInitializationBlocksDeclaration>();
         staticFieldInitializations = new ArrayList<JFieldDeclaration>();
     }
 
@@ -111,6 +114,10 @@ class JClassDeclaration extends JAST implements JTypeDecl {
 
     public ArrayList<JFieldDeclaration> instanceFieldInitializations() {
         return instanceFieldInitializations;
+    }
+
+    public ArrayList<JInitializationBlocksDeclaration> initialisationBlocksDeclarations(){
+        return initializationBlocksDeclarations;
     }
 
     /**
@@ -212,6 +219,10 @@ class JClassDeclaration extends JAST implements JTypeDecl {
                 } else {
                     instanceFieldInitializations.add(fieldDecl);
                 }
+            }
+            if(member instanceof JInitializationBlocksDeclaration){
+                JInitializationBlocksDeclaration initBlock = (JInitializationBlocksDeclaration) member;
+                initializationBlocksDeclarations.add(initBlock);
             }
         }
 
