@@ -1235,6 +1235,7 @@ private JExpression expression(): {
 private JExpression assignmentExpression(): {
     int line = 0;
     JExpression lhs = null, rhs = null;
+    
 }
 {
     try {
@@ -1273,34 +1274,18 @@ private JExpression assignmentExpression(): {
 
 private JExpression ternaryExpression():{
     int line = 0;
-    JExpression lhs = null, rhs = null;
+    JExpression lhs = null, expr1 = null, expr2 = null;
 }
 {
     try {
-        lhs = conditionalOrExpression() { line = lhs.line(); }
-             
-            <QUESTION> 
-            rhs = ternaryElseExpression()
-            { lhs = new JConditionalExpressionCondition(line, lhs, rhs); }
-           
-    }
-    catch (ParseException e) {
-        recoverFromError(new int[] { SEMI, EOF }, e);
-    }
-    { return lhs; }
-}
-
-private JExpression ternaryElseExpression():{
-    int line = 0;
-    JExpression lhs = null, rhs = null;
-}
-{
-    try {
-        lhs = conditionalOrExpression() { line = lhs.line(); }
-             
-            <COLON>
-            rhs = conditionalOrExpression()
-            { lhs = new JConditionalExpressionExpression(line, lhs, rhs); }
+        lhs = conditionalOrExpression() { line = lhs.line(); }    
+        (
+        <QUESTION>
+        expr1 = additiveExpression()
+        <COLON>
+        expr2 = additiveExpression()
+        {lhs = new JTernaryExpression(line, lhs, expr1, expr2); }
+        )
     }
     catch (ParseException e) {
         recoverFromError(new int[] { SEMI, EOF }, e);
@@ -1479,6 +1464,10 @@ private JExpression multiplicativeExpression(): {
     try {
         lhs = unaryExpression() { line = lhs.line(); }
         (
+            <DIV>
+            rhs = unaryExpression()
+            { lhs = new JDivideOp(line, lhs, rhs); } |
+
             <STAR>
             rhs = unaryExpression()
             { lhs = new JMultiplyOp(line, lhs, rhs); }
