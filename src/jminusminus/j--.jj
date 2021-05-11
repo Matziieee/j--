@@ -550,7 +550,7 @@ private ArrayList<JMember> classBody(): {
                 {
                     line = token.beginLine;
 
-                    aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
+                    aMember = new JInitializationBlocksDeclaration(line, mods, body); 
                     members.add(aMember);
                 }
 
@@ -561,7 +561,7 @@ private ArrayList<JMember> classBody(): {
                 {
                     line = token.beginLine;
 
-                    aMember = new JInitialisationBlocksDeclaration(line, mods, body); 
+                    aMember = new JInitializationBlocksDeclaration(line, mods, body); 
                     members.add(aMember);
                 }
 
