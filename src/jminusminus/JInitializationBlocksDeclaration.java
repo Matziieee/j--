@@ -59,15 +59,14 @@ public class JInitializationBlocksDeclaration extends JMethodDeclaration impleme
         if (body != null) {
             body = body.analyze(this.context);
         }
+        
         return this;
     }
 
-    public void partialCodegen(Context context, CLEmitter partial) {
-
-    }
-
     public void codegen(CLEmitter output) {
-
+        if (body != null) {
+            body.codegen(output);
+        }
     }
 
 

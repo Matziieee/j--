@@ -205,11 +205,11 @@ class JClassDeclaration extends JAST implements JTypeDecl {
      */
 
     public JAST analyze(Context context) {
+
         // Analyze all members
         for (JMember member : classBlock) {
             ((JAST) member).analyze(this.context);
         }
-
         // Copy declared fields for purposes of initialization.
         for (JMember member : classBlock) {
             if (member instanceof JFieldDeclaration) {
@@ -225,6 +225,8 @@ class JClassDeclaration extends JAST implements JTypeDecl {
                 initializationBlocksDeclarations.add(initBlock);
             }
         }
+
+
 
         // Finally, ensure that a non-abstract class has
         // no abstract methods.
