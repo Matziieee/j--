@@ -2,16 +2,17 @@ package junit;
 
 import junit.framework.TestCase;
 
+import pass.Interfaces;
 import pass.ImplementingClass;
 
 public class InterfaceTest extends TestCase{
 
     
-    private ImplementingClass imp;
+    private Interfaces inter;
 
     protected void setUp() throws Exception{
         super.setUp();
-        imp =  new ImplementingClass();
+        inter =  new ImplementingClass();
     }
 
     protected void tearDown() throws Exception{
@@ -19,7 +20,7 @@ public class InterfaceTest extends TestCase{
     }
 
     public void testImplements() {
-        this.assertEquals(imp.mustIncludeThis(),2);
+        this.assertEquals(inter.mustIncludeThis(),2);
     }
     
 }
