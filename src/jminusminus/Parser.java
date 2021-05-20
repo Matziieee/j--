@@ -1589,13 +1589,13 @@ public class Parser {
 
     private JExpression ternaryExpression() {
         int line = scanner.token().line();
+        JExpression expr1, expr2;
         JExpression lhs = conditionalOrExpression();
-        boolean more = true;
         if(have(QUESTION)){
-            return new JConditionalExpressionCondition(line, lhs, ternaryExpression());
-        }
-        else if (have(COLON)){
-            return new JConditionalExpressionExpression(line, lhs, ternaryExpression());
+            expr1 = ternaryExpression();
+            mustBe(COLON);
+            expr2 = ternaryExpression();
+            lhs = new JTernaryExpression(line, lhs, expr1, expr2);
         }
         return lhs;
     }
@@ -1608,17 +1608,4 @@ public class Parser {
         }
         return lhs;
     }
-    // A tracing aid. Invoke to debug the parser to see what token
-    // is being parsed at that point.
-    //
-    // private void trace( String message )
-    // {
-    // System.err.println( "["
-    // + scanner.token().line()
-    // + ": "
-    // + message
-    // + ", looking at a: "
-    // + scanner.token().tokenRep()
-    // + " = " + scanner.token().image() + "]" );
-    // }
 }
